@@ -11,9 +11,6 @@ mongoose
     .then(()=>{
         const app = express();
         app.use('/', WordRouter);
-        app.post('/pronounce', (req, res) => {
-            console.log(req.body)
-        })
         app.listen(port, () => {
             console.log("Server listening on port", port)
         });
