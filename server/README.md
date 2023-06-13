@@ -4,6 +4,16 @@ This API accesses a database of words and their corresponding properties created
 
 <br><br>
 
+## Access
+
+In order to access results from the /api endpoints, authorization key be sent in Authorization header of GET request.
+
+Format of Authorization header should be:
+
+  Authorization: Basic `<username:password (base64 encoded)>`
+
+[Click Here](mailto:dev.by.hutch@gmail.com) to send an email requesting access.
+
 ## Results format
 
 Responses are formatted as JSON.
