@@ -9,20 +9,20 @@ wordRouter.get("/", (req, res) => {
       res.send(words);
     })
     .catch((err) => {
-      res.status(400).json("Error occured:", err);
+      res.status(400).send("Error occured:", err);
     });
 });
 wordRouter.get("/words/:word", (req, res) => {
   Words.findOne({ word: req.params.word })
     .then((word) => {
       if (!word) {
-        res.status(400).json(`The word >>| ${req.params.word} |<< is not present in our database.`)
+        res.status(400).send(`The word >>| ${req.params.word} |<< is not present in our database.`)
         return;
       }
       res.send(word);
     })
     .catch((err) => {
-      res.status(400).json("Error occured:", err);
+      res.status(400).send("Error occured:", err);
     });
 });
 
@@ -41,7 +41,7 @@ wordRouter.get("/words", (req, res) => {
         if (q == "limit") {
           break;
         }
-        res.status(400).json(`Improper query format. Parameter >>| ${q} |<< not found in API query options.`)
+        res.status(400).send(`Improper query format. Parameter >>| ${q} |<< not found in API query options.`)
         return;
       } 
     }
@@ -51,7 +51,7 @@ wordRouter.get("/words", (req, res) => {
       console.log(`Returned ${words.length} results`)
     })
     .catch((err) => {
-      res.status(400).json("Error occured:", err);
+      res.status(400).send("Error occured:", err);
     });
 })
 
@@ -66,7 +66,7 @@ wordRouter.get("/random", (req, res) => {
       if (keys.hasOwnProperty(q)) {
         filter[keys[q].term] = keys[q].val;
       } else {
-        res.status(400).json(`Improper query format. Parameter >>| ${q} |<< not found in API query options.`)
+        res.status(400).send(`Improper query format. Parameter >>| ${q} |<< not found in API query options.`)
         return;
       } 
     }
@@ -77,7 +77,7 @@ wordRouter.get("/random", (req, res) => {
       console.log(`Returned one random word: ${random.word}, from ${words.length} results`)
     })
     .catch((err) => {
-      res.status(400).json("Error occured:", err);
+      res.status(400).send("Error occured:", err);
     });
 })
 
