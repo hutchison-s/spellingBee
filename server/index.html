@@ -5,9 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       body {
+        width: 100vw;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        position: relative;
+      }
+      section {
         color: black;
-        width: 90vw;
+        width: 90%;
+        max-width: 1000px;
         margin: 0 auto;
+        line-height: 1.5;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
       }
       code {
         display: block;
@@ -15,16 +25,44 @@
         color: white;
         padding: 1rem;
         border-radius: 0.5rem;
+        overflow-x: auto;
+      }
+      h1 {
+        font-size: 2.5rem;
       }
       h2 {
         color: navy;
+        font-size: 2rem;
+        margin-top: 3rem;
       }
       h3 {
         color: steelblue;
       }
+      th {
+        border-bottom: 1px solid navy;
+        text-align: left;
+      }
+      tr {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        margin-bottom: 1rem;
+      }
+      li:last-child {
+        margin-bottom: 3rem;
+      }
+      @media (min-width: 520px) {
+        h1 {
+          font-size: 3.5rem;
+        }
+        table,
+        code {
+          margin: 0 2rem;
+        }
+      }
     </style>
   </head>
   <body>
+    <section>
     <h1 id="beeyondwords-api">BeeyondWords API</h1>
     <p>
       This API accesses a database of words and their corresponding properties
@@ -63,7 +101,6 @@
     <ul>
       <li>Returns an array of all words in the database</li>
     </ul>
-    <p><br /></p>
     <h3 id="-api-words">/api/words</h3>
     <ul>
       <li>
@@ -210,5 +247,6 @@
   <span class="hljs-attr">"gradeLevel"</span>: <span class="hljs-number">5</span>
 }
 </code></pre>
+</section>
   </body>
 </html>
