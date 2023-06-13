@@ -9,7 +9,7 @@ wordRouter.get("/", (req, res) => {
       res.send(words);
     })
     .catch((err) => {
-      res.status(400).send("Error occured:", err);
+      res.status(400).send("Error occured: "+err);
     });
 });
 wordRouter.get("/words/:word", (req, res) => {
@@ -22,7 +22,7 @@ wordRouter.get("/words/:word", (req, res) => {
       res.send(word);
     })
     .catch((err) => {
-      res.status(400).send("Error occured:", err);
+      res.status(400).send("Error occured: "+err);
     });
 });
 
@@ -51,7 +51,7 @@ wordRouter.get("/words", (req, res) => {
       console.log(`Returned ${words.length} results`)
     })
     .catch((err) => {
-      res.status(400).send("Error occured:", err);
+      res.status(400).send("Error occured: "+err);
     });
 })
 
@@ -77,7 +77,7 @@ wordRouter.get("/random", (req, res) => {
       console.log(`Returned one random word: ${random.word}, from ${words.length} results`)
     })
     .catch((err) => {
-      res.status(400).send("Error occured:", err);
+      res.status(400).send("Error occured: "+err);
     });
 })
 
