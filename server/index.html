@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>BeeyondWords API</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        color: black;
+        width: 90vw;
+        margin: 0 auto;
+      }
+      code {
+        display: block;
+        background: #444;
+        color: white;
+        padding: 1rem;
+        border-radius: 0.5rem;
+      }
+      h2 {
+        color: navy;
+      }
+      h3 {
+        color: steelblue;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="beeyondwords-api">BeeyondWords API</h1>
+    <p>
+      This API accesses a database of words and their corresponding properties
+      created by ChatGPT.
+    </p>
+    <h2 id="results-format">Results format</h2>
+    <p>Responses are formatted as JSON.</p>
+    <p>
+      The structure of each word is an object with the following properties:
+    </p>
+    <pre><code class="lang-json">{
+    <span class="hljs-attr">"_id"</span>: String,
+    <span class="hljs-attr">"word"</span>: String,
+    <span class="hljs-attr">"part_of_speech"</span>: String,
+    <span class="hljs-attr">"definition"</span>: String,
+    <span class="hljs-attr">"etymology"</span>: String,
+    <span class="hljs-attr">"example_sentence"</span>: String,
+    <span class="hljs-attr">"gradeLevel"</span>: Number
+}
+</code></pre>
+    <p>
+      If the endpoint you call can return multiple results, results will be
+      stored in an array, even if there is only one matching result.
+    </p>
+    <pre><code class="lang-json">{
+    [
+        {<span class="hljs-keyword">first</span> <span class="hljs-built_in">word</span>},
+        {<span class="hljs-keyword">second</span> <span class="hljs-built_in">word</span>},
+        {<span class="hljs-keyword">third</span> <span class="hljs-built_in">word</span>}
+    ]
+}
+</code></pre>
+    <p><br /></p>
+    <h2 id="endpoints">Endpoints</h2>
+    <h3 id="-api">/api</h3>
+    <ul>
+      <li>Returns an array of all words in the database</li>
+    </ul>
+    <p><br /></p>
+    <h3 id="-api-words">/api/words</h3>
+    <ul>
+      <li>
+        If no query paramaters are present (&#39;/words&#39;), all words are
+        returned in results.
+      </li>
+      <li>All parameters are optional and may occur in any order.</li>
+      <li>All parameters are case-insensitive.</li>
+    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>Parameter</th>
+          <th>Argument</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>word</td>
+          <td>
+            string to search within <strong>word</strong> property of results<br />Example:
+            /words?word=qui
+          </td>
+        </tr>
+        <tr>
+          <td>origin</td>
+          <td>
+            string to search within <strong>etymology</strong> property of
+            results<br />Example: /words?origin=greek
+          </td>
+        </tr>
+        <tr>
+          <td>part</td>
+          <td>
+            string to search within <strong>part_of_speech</strong> property of
+            results<br />Example: /words?part=adjective
+          </td>
+        </tr>
+        <tr>
+          <td>limit</td>
+          <td>
+            number of maximum results to return<br />Example: /words?limit=6
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Example:</p>
+    <pre><code>    /api/words?word=<span class="hljs-built_in">at</span>&amp;<span class="hljs-built_in">part</span>=<span class="hljs-built_in">noun</span>&amp;<span class="hljs-built_in">origin</span>=latin&amp;<span class="hljs-built_in">limit</span>=<span class="hljs-number">2</span>
+</code></pre>
+    <p>Returns:</p>
+    <pre><code class="lang-json">    {
+      [
+        {
+          <span class="hljs-string">"_id"</span>: <span class="hljs-string">"6485e65c2d1d917088c51b11"</span>,
+          <span class="hljs-string">"word"</span>: <span class="hljs-string">"trepidation"</span>,
+          <span class="hljs-string">"part_of_speech"</span>: <span class="hljs-string">"noun"</span>,
+          <span class="hljs-string">"definition"</span>: <span class="hljs-string">"a feeling of fear or agitation about something that may happen"</span>,
+          <span class="hljs-string">"etymology"</span>: <span class="hljs-string">"Latin"</span>,
+          <span class="hljs-string">"example_sentence"</span>: <span class="hljs-string">"She entered the haunted house with trepidation."</span>,
+          <span class="hljs-string">"gradeLevel"</span>: <span class="hljs-number">8</span>
+        },
+        {
+          <span class="hljs-string">"_id"</span>: <span class="hljs-string">"6485e65e2d1d917088c51b4c"</span>,
+          <span class="hljs-string">"word"</span>: <span class="hljs-string">"Interpretation"</span>,
+          <span class="hljs-string">"part_of_speech"</span>: <span class="hljs-string">"noun"</span>,
+          <span class="hljs-string">"definition"</span>: <span class="hljs-string">"The action of explaining the meaning or significance of something, often based on personal understanding or analysis."</span>,
+          <span class="hljs-string">"etymology"</span>: <span class="hljs-string">"Latin"</span>,
+          <span class="hljs-string">"example_sentence"</span>: <span class="hljs-string">"Literary critics often provide different interpretations of the same poem."</span>,
+          <span class="hljs-string">"gradeLevel"</span>: <span class="hljs-number">8</span>
+        }
+      ]
+    }
+</code></pre>
+    <p><br /></p>
+    <h3 id="-api-words-word">/api/words/:word</h3>
+    <ul>
+      <li>Return one result for a specific word.</li>
+      <li>
+        If the word doesn&#39;t exist in the database, a 404 status is returned
+        with an error message indicating the word does not exist in the
+        database.
+      </li>
+    </ul>
+    <p>Example:</p>
+    <pre><code>/api/<span class="hljs-built_in">words</span>/resilient
+</code></pre>
+    <p>Returns:</p>
+    <pre><code class="lang-json">{
+  <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"6485e65b2d1d917088c51af5"</span>,
+  <span class="hljs-attr">"word"</span>: <span class="hljs-string">"resilient"</span>,
+  <span class="hljs-attr">"part_of_speech"</span>: <span class="hljs-string">"adjective"</span>,
+  <span class="hljs-attr">"definition"</span>: <span class="hljs-string">"able to withstand or recover quickly from difficult conditions"</span>,
+  <span class="hljs-attr">"etymology"</span>: <span class="hljs-string">"Latin"</span>,
+  <span class="hljs-attr">"example_sentence"</span>: <span class="hljs-string">"The community showed resilience in rebuilding after the devastating storm."</span>,
+  <span class="hljs-attr">"gradeLevel"</span>: <span class="hljs-number">8</span>
+}
+</code></pre>
+    <p><br /></p>
+    <h3 id="-api-random">/api/random</h3>
+    <ul>
+      <li>Return one randome result from query parameter results</li>
+      <li>
+        If no query paramaters are present (&#39;/random&#39;), one random word
+        from the entire database is returned.
+      </li>
+      <li>All parameters are optional and may occur in any order.</li>
+      <li>All parameters are case-insensitive.</li>
+    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>Parameter</th>
+          <th>Argument</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>origin</td>
+          <td>
+            string to search within <strong>etymology</strong> property of
+            results<br />Example: /random?origin=arabic
+          </td>
+        </tr>
+        <tr>
+          <td>part</td>
+          <td>
+            string to search within <strong>part_of_speech</strong> property of
+            results<br />Example: /random?part=verb
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Example:</p>
+    <pre><code>/api/<span class="hljs-built_in">random</span>?<span class="hljs-built_in">part</span>=verb
+</code></pre>
+    <p>Returns:</p>
+    <pre><code class="lang-json">{
+  <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"64862d48529728b8f6b47408"</span>,
+  <span class="hljs-attr">"word"</span>: <span class="hljs-string">"Realize"</span>,
+  <span class="hljs-attr">"part_of_speech"</span>: <span class="hljs-string">"Verb"</span>,
+  <span class="hljs-attr">"definition"</span>: <span class="hljs-string">"Become fully aware of or understand something"</span>,
+  <span class="hljs-attr">"etymology"</span>: <span class="hljs-string">"Latin"</span>,
+  <span class="hljs-attr">"example_sentence"</span>: <span class="hljs-string">"She suddenly realized that she had forgotten her keys."</span>,
+  <span class="hljs-attr">"gradeLevel"</span>: <span class="hljs-number">5</span>
+}
+</code></pre>
+  </body>
+</html>

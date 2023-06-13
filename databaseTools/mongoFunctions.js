@@ -47,6 +47,7 @@ async function main() {
 
     try {
         await client.connect()
+        await addAllFromFile(client.db("SpellingBeeWords").collection("words"), './grade3.json')
         await findDuplicates(client.db("SpellingBeeWords").collection("words"))
     } catch (err) {
         console.error(err);

@@ -37,13 +37,13 @@ If the endpoint you call can return multiple results, results will be stored in 
 
 ## Endpoints
 
-## /
+## /api
 
   - Returns an array of all words in the database
 
 <br>
 
-### /words
+### /api/words
 
 - If no query paramaters are present ('/words'), all words are returned in results.
 - All parameters are optional and may occur in any order.
@@ -58,7 +58,7 @@ If the endpoint you call can return multiple results, results will be stored in 
 
 Example:
 ```
-    /words?word=at&part=noun&origin=latin&limit=2
+    /api/words?word=at&part=noun&origin=latin&limit=2
 ```
 Returns:
 ```json    
@@ -87,7 +87,7 @@ Returns:
 ```
 <br>
 
-### /words/:word
+### /api/words/:word
 
 
   - Return one result for a specific word.
@@ -95,7 +95,7 @@ Returns:
 
 Example:
 ```
-/words/resilient
+/api/words/resilient
 ```
 Returns:
 ```json
@@ -111,7 +111,7 @@ Returns:
 ```
 <br>
 
-### /random
+### /api/random
 
   - Return one randome result from query parameter results
   - If no query paramaters are present ('/random'), one random word from the entire database is returned.
@@ -125,7 +125,7 @@ Returns:
 
 Example:
 ```
-/random?part=verb
+/api/random?part=verb
 ```
 Returns:
 ```json

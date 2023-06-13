@@ -10,6 +10,9 @@ mongoose
     .then(()=>{
         const app = express();
         const WordRouter = require('./routers/Router')
+        // app.get('/', (req, res) => {
+        //     res.set('Content-Type', 'text/html').send('./index.html')
+        // })
         app.use('/api', WordRouter);
         app.get('/ping', (req, res) => {
             res.send("pong")
