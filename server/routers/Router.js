@@ -1,5 +1,5 @@
 const Words = require("../schemas/Words");
-const Users = require('../schemas/Users')
+const Users = require('../schemas/Users');
 const { Router } = require("express");
 
 const wordRouter = new Router();
@@ -33,7 +33,7 @@ wordRouter.use((req, res, next) => {
         return next(err);
       }
     }).catch(err => {
-      next(err)
+      return next(err)
     })
 })
 
