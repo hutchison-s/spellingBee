@@ -6,8 +6,14 @@ require('dotenv').config()
 async function addAllFromFile(collection, fileName) {
     const file = await JSON.parse(fs.readFileSync(fileName, 'utf-8'));
     for await (const word of file.words) {
-        const result = await collection.insertOne(word);
-        console.log(`New listing created with the following id: ${result.insertedId}`)
+        let regex = new RegExp('^'+word.word+'$', "i")
+        const exists = await collection.findOne({word: regex})
+        if (!exists) {
+            const result = await collection.insertOne(word);
+            console.log(`Adding ${word.word}`)
+        } else {
+            console.log(`Skipping ${word.word} because it already exists.`)
+        }
     }
 }
 
@@ -29,6 +35,40 @@ async function findDuplicates(collection) {
     }
 }
 
+async function checkDup(collection) {
+    const allWords = [];
+    const arr = await collection.find().toArray()
+    for await (const {word} of arr) {
+        allWords.push(word.toLowerCase())
+    }
+    const newSet = new Set(allWords);
+    allWords.length === newSet.size
+        ? console.log('No duplicates found')
+        : console.log(`${allWords.length - newSet.size} duplicates found. Run deleteDup function to remove duplicates.`)
+}
+
+async function deleteDup(collection) {
+    const allWords = [];
+    const count = {}
+    const arr = await collection.find().toArray()
+    for await (const {word} of arr) {
+        if (count[word.toLowerCase()]) {
+            count[word.toLowerCase()] = count[word.toLowerCase()] + 1;
+        } else {
+            count[word.toLowerCase()] = 1;
+        }
+    }
+    for (let each in count) {
+        console.log(each)
+        // if (count[each] > 1) {
+        //     console.log(each+" has "+count[each]+" entries")
+            // let reg = new RegExp(each, 'i')
+            // let result = await collection.findOneAndDelete({word: reg})
+            // console.log('Deleted '+result.deletedCount)
+        // }
+    }
+}
+
 // Delete all documents matching the provided filter criteria
 async function deleteMatches(collection, match) {
     const result = await collection.deleteMany(match)
@@ -47,8 +87,10 @@ async function main() {
 
     try {
         await client.connect()
-        await addAllFromFile(client.db("SpellingBeeWords").collection("words"), './grade3.json')
-        await findDuplicates(client.db("SpellingBeeWords").collection("words"))
+        await addAllFromFile(client.db("SpellingBeeWords").collection("words"), './12ext.json')
+        // await findDuplicates(client.db("SpellingBeeWords").collection("words"))
+        // await deleteDup(client.db("SpellingBeeWords").collection("words"))
+
     } catch (err) {
         console.error(err);
     } finally {
