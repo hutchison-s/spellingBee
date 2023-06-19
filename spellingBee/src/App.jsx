@@ -6,14 +6,13 @@ import './App.css'
 
 function App() {
   const [currentApp, setCurrentApp] = useState('Spelling')
-  const auth = 'Basic c3BlbGxpbmdiZWU6Y2hhbXBpb24xMDAh';
   
   function returnApp(choice) {
     switch (choice) {
       case 'Spelling':
-        return <Spelling auth={auth}/>;
+        return <Spelling />;
       case 'Definitions':
-        return <Definitions auth={auth}/>
+        return <Definitions />
     }
   }
 

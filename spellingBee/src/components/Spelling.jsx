@@ -1,8 +1,7 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
-import PropTypes from 'prop-types'
 
-export default function Spelling(auth) {
+export default function Spelling() {
   const [currentWord, setCurrentWord] = useState('')
   const [score, setScore] = useState(0);
   const [correctWords, setCorrectWords] = useState([]);
@@ -24,7 +23,7 @@ export default function Spelling(auth) {
   }, [])
 
   function getRandom() {
-    let config = {headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': auth}}
+    let config = {headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': 'Basic c3BlbGxpbmdiZWU6Y2hhbXBpb24xMDAh'}}
     axios.get('/api/random?grade='+currentLevel, config).then(response => {
       if (correctWords.includes(response.data.word)) {
         return getRandom();
@@ -141,8 +140,4 @@ export default function Spelling(auth) {
           </section>
       </article>
   )
-}
-
-Spelling.propTypes = {
-  auth: PropTypes.string
 }

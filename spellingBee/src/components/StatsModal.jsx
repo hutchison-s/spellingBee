@@ -43,9 +43,9 @@ export default function StatsModal() {
                 id="statModalClose"
                 onClick={()=>{
                     document.getElementById('statsModal').close();
-                }}>X</button>
+                }}><i className="bi bi-x-circle-fill"></i></button>
             <h2 className='modalTitle'>Beeyond Words API Stats</h2>
-            {apiData && mapData()}
+            {apiData && mapData().map((div, idx) => <div key={idx}>{div}</div>)}
         </dialog>
     )
 }

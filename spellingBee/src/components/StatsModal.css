@@ -7,8 +7,8 @@
     max-width: 500px;
     height: 80vh;
     max-height: 1000px;
-    background-color: #222222;
-    color: #efefef;
+    background-color: var(--raisin);
+    color: var(--almostwhite);
     text-align: center;
     padding: 2rem 1rem;
     border-radius: 1rem;
@@ -22,7 +22,7 @@
 }
 .statHead {
     margin: 1rem auto;
-    color: gold;
+    color: var(--honey);
 }
 .statChart {
     margin: 1rem auto 3rem;
@@ -30,14 +30,17 @@
     place-items: center;
 }
 #statModalClose {
-    position: fixed;
-    top: 5px;
-    right: 5px;
-    background: darkgoldenrod;
-    color: #efefef;
-    width: 50px;
-    height: 50px;
+    position: sticky;
+    top: 0;
+    left: 90%;
+    text-align: right;
+    background: var(--brightblue);
+    color: var(--almostwhite);
+    padding: 4px;
+    line-height: 1;
     display: grid;
+    font-size: 2rem;
     place-items: center;
     border-radius: 50%;
+    border: none;
 }

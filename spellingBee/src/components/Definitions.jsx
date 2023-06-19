@@ -1,14 +1,15 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import PropTypes from 'prop-types'
 
-export default function Definitions(auth) {
+export default function Definitions() {
   const [currentWord, setCurrentWord] = useState('')
   const [score, setScore] = useState(0)
   const [options, setOptions] = useState([]);
   const [correctWords, setCorrectWords] = useState([]);
   const [streak, setStreak] = useState(0)
   const [currentLevel, setCurrentLevel] = useState(3)
+  const chime = document.getElementById('chime')
+  const alarm = document.getElementById('alarm')
   const synth = window.speechSynthesis;
 
   const levels = {
@@ -46,8 +47,8 @@ export default function Definitions(auth) {
   }
 
   async function getOptions() {
-    console.log(options)
-    let config = {headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': auth}}
+    
+    let config = {headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': 'Basic c3BlbGxpbmdiZWU6Y2hhbXBpb24xMDAh'}}
     const ops = [];
     for (let i=0; i<4; i++) {
       const res = await axios.get('/api/random?grade='+currentLevel, config)
@@ -58,8 +59,9 @@ export default function Definitions(auth) {
       }
     }
     setOptions([...ops])
-    const word = await ops[Math.floor(Math.random() * ops.length - 1)]
+    const word = ops[Math.floor(Math.random() * ops.length)]
     console.log(word)
+    console.log(ops)
     setCurrentWord(await word)
     pronounce(await word.word)
   }
@@ -123,9 +125,11 @@ export default function Definitions(auth) {
   function checkAnswer(e) {
     e.preventDefault();
     if (e.target.innerHTML.toLowerCase() === currentWord.definition.toLowerCase()) {
-      rightAnswer(e)
+      chime.play();
+      rightAnswer(e);
     } else {
-      wrongAnswer(e)
+      alarm.play();
+      wrongAnswer(e);
     }
   }
 
@@ -147,8 +151,4 @@ export default function Definitions(auth) {
             <button className='warning' onClick={()=>{setStreak(0); getOptions()}}>Skip</button>
       </article>
   )
-}
-
-Definitions.propTypes = {
-  auth: PropTypes.string
 }

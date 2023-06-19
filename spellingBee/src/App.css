@@ -8,6 +8,14 @@
   padding: 0;
   box-sizing: border-box;
 }
+:root {
+  --raisin: #171B27;
+  --darkblue: #212738;
+  --brightblue: #0969D7;
+  --almostwhite: #EDF2EF;
+  --honey: #f6db55;
+  --darkgold: #9C6D3A;
+}
 #root {
   max-width: 1280px;
   min-height: 100vh;
