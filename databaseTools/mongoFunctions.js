@@ -87,7 +87,7 @@ async function main() {
 
     try {
         await client.connect()
-        await addAllFromFile(client.db("SpellingBeeWords").collection("words"), './12ext.json')
+        await addAllFromFile(client.db("SpellingBeeWords").collection("words"), './5ext.json')
         // await findDuplicates(client.db("SpellingBeeWords").collection("words"))
         // await deleteDup(client.db("SpellingBeeWords").collection("words"))
 

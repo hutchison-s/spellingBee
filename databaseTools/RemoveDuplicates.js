@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-const oldJson = JSON.parse(fs.readFileSync('./grade3.json', {encoding: 'utf-8'}))
+const oldJson = JSON.parse(fs.readFileSync('./5ext.json', {encoding: 'utf-8'}))
 const newArray = [];
 
 const noDups = oldJson.words.filter((w) => {
@@ -19,7 +19,7 @@ oldJson.words = noDups;
 
 console.log(oldJson.words.length)
 
-fs.writeFile('./grade3.json', JSON.stringify(oldJson), 'utf-8', (err)=>{
+fs.writeFile('./5ext.json', JSON.stringify(oldJson), 'utf-8', (err)=>{
     if (err) {
         console.log(err)
     } else {

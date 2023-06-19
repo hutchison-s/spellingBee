@@ -1,19 +1,39 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import PropTypes from 'prop-types'
 
-export default function Definitions() {
+export default function Definitions(auth) {
   const [currentWord, setCurrentWord] = useState('')
   const [score, setScore] = useState(0)
   const [options, setOptions] = useState([]);
+  const [correctWords, setCorrectWords] = useState([]);
+  const [streak, setStreak] = useState(0)
+  const [currentLevel, setCurrentLevel] = useState(3)
   const synth = window.speechSynthesis;
+
+  const levels = {
+    3: {next: 5},
+    5: {next: 8, prev: 3},
+    8: {next: 12, prev: 5},
+    12: {prev: 8}
+  }
 
   useEffect(()=>{
     getOptions()
   }, [])
 
-  useEffect(()=>{
-    pronounce(currentWord.word)
-  }, [currentWord])
+  function levelToWord(level) {
+    switch (level) {
+      case 3:
+        return 'Novice';
+      case 5:
+        return 'Beginner';
+      case 8:
+        return 'Skilled';
+      case 12:
+        return 'Advanced';
+    }
+  }
 
   function pronounce (text) {
     synth.cancel();
@@ -27,14 +47,21 @@ export default function Definitions() {
 
   async function getOptions() {
     console.log(options)
-    let config = {headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': 'Basic c3BlbGxpbmdiZWU6Y2hhbXBpb24xMDAh'}}
+    let config = {headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': auth}}
     const ops = [];
     for (let i=0; i<4; i++) {
-      const res = await axios.get('/api/random', config)
-      ops.push(res.data)
+      const res = await axios.get('/api/random?grade='+currentLevel, config)
+      if (correctWords.includes(res.data.word)) {
+        i--;
+      } else {
+        ops.push(res.data)
+      }
     }
     setOptions([...ops])
-    setCurrentWord(ops[Math.floor(Math.random() * ops.length - 1)])
+    const word = await ops[Math.floor(Math.random() * ops.length - 1)]
+    console.log(word)
+    setCurrentWord(await word)
+    pronounce(await word.word)
   }
 
   function toTitleCase(string) {
@@ -48,25 +75,47 @@ export default function Definitions() {
   }
 
   function wrongAnswer() {
-    let cb = document.getElementById('cardbody');
-    cb.style.background = "orangered";
+    let box = document.getElementById('currentWord');
+    box.style.background = "orangered";
+    const defs = document.querySelectorAll('.definition');
+    for (let def of defs) {
+      if (def.innerHTML !== currentWord.definition) {
+        def.style.opacity = '0.1'
+      }
+    }
     if (score < Math.floor(currentWord.gradeLevel / 2)) {
       setScore(0)
     } else {
       setScore(score => score - Math.floor(currentWord.gradeLevel / 2))
     }
+    setStreak(0)
     setTimeout(()=>{
-      cb.style.background = 'initial';
+      for (let def of defs) {
+        def.style.opacity = '1'
+      }
+      box.style.background = 'initial';
       getOptions();
-    }, 2000)
+    }, 3000)
   }
 
   function rightAnswer() {
-    let cb = document.getElementById('cardbody');
-    cb.style.background = "lime";
+    let box = document.getElementById('currentWord');
+    box.style.background = "cornsilk";
+    box.style.color = 'darkblue'
+    let check = document.getElementById('checkMark');
+    check.style.scale = '1.5';
     setScore(score => score + Math.floor(currentWord.gradeLevel / 2))
+    setCorrectWords([...correctWords, currentWord.word])
+    setStreak(streak => streak + 1);
+    console.log(streak);
+    if (streak > 9) {
+      setCurrentLevel(levels[currentLevel].next);
+      setStreak(0);
+    }
     setTimeout(()=>{
-      cb.style.background = 'initial';
+      box.style.background = 'initial';
+      box.style.color = '#EDF2EF'
+      check.style.scale = '0'
       getOptions();
     }, 2000)
   }
@@ -81,20 +130,25 @@ export default function Definitions() {
   }
 
   return (
-      <article className="card p-4 text-center shadow-lg container-lg" id='cardbody'>
-          <section className="row mb-4">
-            <h1 className='cart-title'>Choose the Correct Definition</h1>
-            <h3>Score: {score}</h3>
-          </section>
-          <h2>{currentWord && toTitleCase(currentWord.word)}</h2>
+      <article className="appContainer">
+          <h3 id="score">Score: {score}</h3>
+          <h3 id="level">Level: {levelToWord(currentLevel)}</h3>
+          <i id='checkMark' className="bi bi-check-circle-fill"></i>
+          <button
+            id='currentWord'
+            onClick={()=>{pronounce(currentWord.word)}}>{currentWord && toTitleCase(currentWord.word)}</button>
           <p><small>{currentWord && Math.floor(currentWord.gradeLevel / 2)} point word</small></p>
-          {options.map((op, idx) => (
-                <button className='btn btn-primary col-4 mx-auto my-10' onClick={checkAnswer} key={idx}>{op.definition}</button>
-            ))
-          }
-          <section className="row mt-4">
-            <button className='btn btn-danger col-2 mr-0' onClick={getOptions}>Skip</button>
-          </section>
+          <div className="defContainer">
+            {options.map((op, idx) => (
+                  <button className='definition' onClick={checkAnswer} key={idx}>{op.definition}</button>
+              ))
+            }
+          </div>
+            <button className='warning' onClick={()=>{setStreak(0); getOptions()}}>Skip</button>
       </article>
   )
+}
+
+Definitions.propTypes = {
+  auth: PropTypes.string
 }
