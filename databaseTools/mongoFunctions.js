@@ -17,6 +17,43 @@ async function addAllFromFile(collection, fileName) {
     }
 }
 
+// Update all matching documents
+
+async function updateAll(collection, filter, update) {
+    await collection.updateMany(filter, {$set: update})
+}
+
+// Change first letter of each property value to upper case
+
+function toTitleCase(string) {
+    if (!string) {return string}
+    const arr = string.split('');
+    arr[0] = arr[0].toUpperCase();
+    for (let i = 1; i<arr.length; i++) {
+      arr[i] = arr[i].toLowerCase()
+    }
+    return arr.join('')
+  }
+
+async function capitalizeValues(collection) {
+    const allWords = await collection.find().toArray();
+    console.log(allWords)
+    for await (const w of allWords) {
+        let word = toTitleCase(w.word);
+        let def = toTitleCase(w.definition);
+        let part = toTitleCase(w.part_of_speech);
+        let ety = toTitleCase(w.etymology);
+        let examp = toTitleCase(w.example_sentence);
+        await collection.updateOne({_id: w._id}, {$set: {word: word, definition: def, part_of_speech: part, etymology: ety, example_sentence: examp}})    
+        // await collection.updateOne({_id: w._id}, {$set: {definition: def}})    
+        // await collection.updateOne({_id: w._id}, {$set: {part_of_speech: part}})    
+        // await collection.updateOne({_id: w._id}, {$set: {etymology: ety}})    
+        // await collection.updateOne({_id: w._id}, {$set: {example_sentence: examp}})    
+        console.log('Updated', w)
+    }
+}
+
+
 // Finds and reports duplicate words in the collection
 async function findDuplicates(collection) {
     const totalWords = await collection.distinct("word");
@@ -81,16 +118,25 @@ async function changeName(collection, newName) {
     console.log(result)
 }
 
+// Console Log the matching words
+async function logWords(collection, filter) {
+    const matches = await collection.find(filter);
+    for await (const w of matches) {
+        console.log(w.word)
+    }
+}
+
 async function main() {
     const uri = process.env.MONGO_URI;
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
     try {
         await client.connect()
-        await addAllFromFile(client.db("SpellingBeeWords").collection("words"), './5ext.json')
+        // await logWords(client.db("SpellingBeeWords").collection("words"), {etymology: null})
+        await addAllFromFile(client.db("SpellingBeeWords").collection("words"), './span.json')
         // await findDuplicates(client.db("SpellingBeeWords").collection("words"))
         // await deleteDup(client.db("SpellingBeeWords").collection("words"))
-
+        // await updateAll(client.db("SpellingBeeWords").collection("words"), {etymology: null}, {etymology: 'Latin'})
     } catch (err) {
         console.error(err);
     } finally {

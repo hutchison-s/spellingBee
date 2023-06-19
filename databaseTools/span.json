@@ -1,0 +1,213 @@
+{
+    "words": [
+      {
+        "word": "Algebra",
+        "part_of_speech": "Noun",
+        "definition": "A branch of mathematics that deals with symbols and the rules for manipulating those symbols to solve equations.",
+        "etymology": "Arabic",
+        "example_sentence": "She studied algebra to improve her problem-solving skills.",
+        "gradeLevel": 8
+      },
+      {
+        "word": "Coffee",
+        "part_of_speech": "Noun",
+        "definition": "A hot drink made from the roasted and ground seeds (coffee beans) of a tropical shrub.",
+        "etymology": "Arabic",
+        "example_sentence": "He drank a cup of coffee to start his day.",
+        "gradeLevel": 3
+      },
+      {
+        "word": "Safari",
+        "part_of_speech": "Noun",
+        "definition": "An expedition to observe or hunt animals in their natural habitat, especially in East Africa.",
+        "etymology": "Arabic",
+        "example_sentence": "We went on a thrilling safari and saw many wild animals.",
+        "gradeLevel": 5
+      },
+      {
+        "word": "Lemon",
+        "part_of_speech": "Noun",
+        "definition": "A yellow, oval citrus fruit with a sour taste.",
+        "etymology": "Arabic",
+        "example_sentence": "She squeezed fresh lemon juice into the drink.",
+        "gradeLevel": 3
+      },
+      {
+        "word": "Racket",
+        "part_of_speech": "Noun",
+        "definition": "A type of bat with a round or oval frame strung with catgut, nylon, etc., used especially in tennis, badminton, and squash.",
+        "etymology": "Arabic",
+        "example_sentence": "He swung the racket to hit the ball over the net.",
+        "gradeLevel": 5
+      },
+      {
+        "word": "Alcohol",
+        "part_of_speech": "Noun",
+        "definition": "A colorless volatile flammable liquid that is produced by the natural fermentation of sugars and is the intoxicating constituent of wine, beer, spirits, and other drinks.",
+        "etymology": "Arabic",
+        "example_sentence": "The bartender served us drinks containing alcohol.",
+        "gradeLevel": 8
+      },
+      {
+        "word": "Jar",
+        "part_of_speech": "Noun",
+        "definition": "A wide-mouthed cylindrical container made of glass or pottery, typically with a lid.",
+        "etymology": "Arabic",
+        "example_sentence": "I stored the cookies in a jar to keep them fresh.",
+        "gradeLevel": 3
+      },
+      {
+        "word": "Hazard",
+        "part_of_speech": "Noun",
+        "definition": "A danger or risk.",
+        "etymology": "Arabic",
+        "example_sentence": "It's important to be aware of the hazards before starting a new activity.",
+        "gradeLevel": 8
+      },
+      {
+        "word": "Talisman",
+        "part_of_speech": "Noun",
+        "definition": "An object, typically an inscribed ring or stone, that is thought to have magic powers and to bring good luck.",
+        "etymology": "Arabic",
+        "example_sentence": "He wore a talisman around his neck for protection.",
+        "gradeLevel": 12
+      },
+      {
+        "word": "Saffron",
+        "part_of_speech": "Noun",
+        "definition": "An orange-yellow spice obtained from the stigma of a crocus flower, used to flavor food and color dishes.",
+        "etymology": "Arabic",
+        "example_sentence": "The recipe called for a pinch of saffron to enhance the flavor.",
+        "gradeLevel": 8
+      },
+      {
+        "word": "Sofa",
+        "part_of_speech": "Noun",
+        "definition": "A long upholstered seat with a back and arms, for two or more people.",
+        "etymology": "Arabic",
+        "example_sentence": "They sat on the sofa and watched a movie together.",
+        "gradeLevel": 3
+      },
+      {
+        "word": "Caliber",
+        "part_of_speech": "Noun",
+        "definition": "The internal diameter or bore of a gun barrel.",
+        "etymology": "Arabic",
+        "example_sentence": "The caliber of the gun determines the size of the ammunition it can fire.",
+        "gradeLevel": 12
+      },
+      {
+        "word": "Tajine",
+        "part_of_speech": "Noun",
+        "definition": "A North African dish consisting of meat, fish, or vegetables cooked slowly in a shallow earthenware cooking pot with a tall, cone-shaped lid.",
+        "etymology": "Arabic",
+        "example_sentence": "The chef prepared a delicious tajine with chicken and vegetables.",
+        "gradeLevel": 12
+      },
+      {
+        "word": "Pizza",
+        "part_of_speech": "Noun",
+        "definition": "A dish consisting of a flat, round base of dough topped with tomato sauce, cheese, and various toppings, baked in an oven.",
+        "etymology": "Italian",
+        "example_sentence": "She ordered a large pizza with pepperoni and mushrooms.",
+        "gradeLevel": 3
+      },
+      {
+        "word": "Ciao",
+        "part_of_speech": "Interjection",
+        "definition": "Used as a greeting or farewell.",
+        "etymology": "Italian",
+        "example_sentence": "He waved and said, 'Ciao!' as he left the room.",
+        "gradeLevel": 5
+      },
+      {
+        "word": "Pasta",
+        "part_of_speech": "Noun",
+        "definition": "A dish that typically consists of dough made from wheat flour and water, shaped or rolled into various forms, and cooked.",
+        "etymology": "Italian",
+        "example_sentence": "She cooked spaghetti pasta with a tomato sauce.",
+        "gradeLevel": 5
+      },
+      {
+        "word": "Gelato",
+        "part_of_speech": "Noun",
+        "definition": "An Italian style of ice cream, made with a base of milk, cream, and sugar, and flavored with various ingredients.",
+        "etymology": "Italian",
+        "example_sentence": "They enjoyed a scoop of delicious gelato on a hot summer day.",
+        "gradeLevel": 5
+      },
+      {
+        "word": "Opera",
+        "part_of_speech": "Noun",
+        "definition": "A dramatic work in one or more acts, set to music and usually sung throughout.",
+        "etymology": "Italian",
+        "example_sentence": "They attended the opera and were captivated by the performances.",
+        "gradeLevel": 8
+      },
+      {
+        "word": "Gondola",
+        "part_of_speech": "Noun",
+        "definition": "A long, narrow boat used on the canals of Venice, typically propelled by a gondolier.",
+        "etymology": "Italian",
+        "example_sentence": "They took a romantic ride in a gondola through the canals of Venice.",
+        "gradeLevel": 8
+      },
+      {
+        "word": "Fresco",
+        "part_of_speech": "Noun",
+        "definition": "A painting done rapidly in watercolor on wet plaster on a wall or ceiling, so that the colors penetrate the plaster and become fixed as it dries.",
+        "etymology": "Italian",
+        "example_sentence": "They admired the beautiful frescoes on the walls of the ancient cathedral.",
+        "gradeLevel": 12
+      },
+      {
+        "word": "Renaissance",
+        "part_of_speech": "Noun",
+        "definition": "A period of renewed interest and development in art, literature, and culture in Europe during the 14th to the 17th centuries.",
+        "etymology": "Italian",
+        "example_sentence": "The Renaissance brought about significant advancements in various fields of study.",
+        "gradeLevel": 12
+      },
+      {
+        "word": "Soprano",
+        "part_of_speech": "Noun",
+        "definition": "The highest singing voice in women and boys, with a bright and piercing tone.",
+        "etymology": "Italian",
+        "example_sentence": "She performed as a soprano in the opera and impressed the audience with her vocal range.",
+        "gradeLevel": 8
+      },
+      {
+        "word": "Capriccio",
+        "part_of_speech": "Noun",
+        "definition": "A lively piece of music, typically free in form and featuring virtuosic display.",
+        "etymology": "Italian",
+        "example_sentence": "The pianist played a captivating capriccio that showcased their technical skills.",
+        "gradeLevel": 12
+      },
+      {
+        "word": "Allegro",
+        "part_of_speech": "Adjective",
+        "definition": "In a quick and lively tempo.",
+        "etymology": "Italian",
+        "example_sentence": "The symphony started with a lively and energetic allegro movement.",
+        "gradeLevel": 12
+      },
+      {
+        "word": "Fiasco",
+        "part_of_speech": "Noun",
+        "definition": "A complete failure or disaster.",
+        "etymology": "Italian",
+        "example_sentence": "The play turned out to be a fiasco with numerous technical difficulties.",
+        "gradeLevel": 8
+      },
+      {
+        "word": "Cappuccino",
+        "part_of_speech": "Noun",
+        "definition": "An Italian coffee drink made with espresso and hot milk, topped with frothed milk or whipped cream.",
+        "etymology": "Italian",
+        "example_sentence": "He ordered a cappuccino to enjoy with his breakfast.",
+        "gradeLevel": 8
+      }
+    ]
+  }
+  

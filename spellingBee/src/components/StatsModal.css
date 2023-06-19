@@ -1,0 +1,43 @@
+#statsModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: 90vw;
+    max-width: 500px;
+    height: 80vh;
+    max-height: 1000px;
+    background-color: #222222;
+    color: #efefef;
+    text-align: center;
+    padding: 2rem 1rem;
+    border-radius: 1rem;
+}
+#statsModal::backdrop {
+    background-color: #22222288;
+}
+.modalTitle {
+    margin: 2rem auto;
+    font-size: 2.5rem;
+}
+.statHead {
+    margin: 1rem auto;
+    color: gold;
+}
+.statChart {
+    margin: 1rem auto 3rem;
+    display: grid;
+    place-items: center;
+}
+#statModalClose {
+    position: fixed;
+    top: 5px;
+    right: 5px;
+    background: darkgoldenrod;
+    color: #efefef;
+    width: 50px;
+    height: 50px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+}

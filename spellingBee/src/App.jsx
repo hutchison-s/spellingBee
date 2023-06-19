@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Spelling from './components/Spelling';
 import Definitions from './components/Definitions';
+import StatsModal from './components/StatsModal';
 import './App.css'
 
 function App() {
@@ -31,10 +32,11 @@ function App() {
         </div>
       </header>
       {returnApp(currentApp)}
+      <StatsModal />
       <footer>
         <nav>
           <div><a href="#"><i className="bi bi-person-circle"></i></a></div>
-          <div><a href="##"><i className="bi bi-bar-chart-line-fill"></i></a></div>
+          <div><a onClick={()=>{document.getElementById('statsModal').showModal()}}><i className="bi bi-bar-chart-line-fill"></i></a></div>
           <div><a href="###"><i className="bi bi-info-circle"></i></a></div>
         </nav>
       </footer>

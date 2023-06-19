@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-const oldJson = JSON.parse(fs.readFileSync('./5ext.json', {encoding: 'utf-8'}))
+const oldJson = JSON.parse(fs.readFileSync('./span.json', {encoding: 'utf-8'}))
 
 for (const w of oldJson.words) {
     const arr = w.word.split('');
@@ -8,7 +8,7 @@ for (const w of oldJson.words) {
     w.word = arr.join('')
 }
 
-fs.writeFile('./5ext.json', JSON.stringify(oldJson), 'utf-8', (err)=>{
+fs.writeFile('./span.json', JSON.stringify(oldJson), 'utf-8', (err)=>{
     if (err) {
         console.log(err)
     } else {

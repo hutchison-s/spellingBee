@@ -4,6 +4,34 @@ const { Router } = require("express");
 
 const wordRouter = new Router();
 
+wordRouter.get("/stats", (req, res) =>{
+  Words.find()
+    .then(allWords => {
+      const stats = {
+        words: 0,
+        parts_of_speech: {},
+        etymologies: {},
+        gradeLevels: {}
+      };
+      for (const word of allWords) {
+        stats.words += 1;
+        stats.parts_of_speech[word.part_of_speech]
+          ? stats.parts_of_speech[word.part_of_speech] += 1
+          : stats.parts_of_speech[word.part_of_speech] = 1;
+        stats.etymologies[word.etymology]
+          ? stats.etymologies[word.etymology] += 1
+          : stats.etymologies[word.etymology] = 1;
+        stats.gradeLevels[word.gradeLevel]
+          ? stats.gradeLevels[word.gradeLevel] += 1
+          : stats.gradeLevels[word.gradeLevel] = 1;
+      }
+      res.send(stats)
+    })
+    .catch((err) => {
+      res.status(400).send("Error occured: "+err);
+    });
+})
+
 wordRouter.use((req, res, next) => {
   let authHead = req.headers.authorization;
   if (!authHead) {
