@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect } from "react";
-import WordPieChart from "./wordPieChart";
+import WordPieChart from "./WordPieChart";
 import './StatsModal.css'
 
 export default function StatsModal() {

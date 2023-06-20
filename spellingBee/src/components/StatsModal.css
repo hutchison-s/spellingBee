@@ -29,6 +29,13 @@
     display: grid;
     place-items: center;
 }
+.recharts-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 1rem;
+    height: 500px;
+}
 #statModalClose {
     position: sticky;
     top: 0;

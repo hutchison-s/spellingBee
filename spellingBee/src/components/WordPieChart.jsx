@@ -18,6 +18,7 @@ export default function WordPieChart ({ dataset }) {
         cx="50%"
         cy="50%"
         outerRadius={80}
+        innerRadius={40}
         fill="#8884d8"
         label
       >
