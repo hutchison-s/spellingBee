@@ -20,7 +20,7 @@ function App() {
     <>
       <header>
         <div className="logoContainer">
-          <img className='logoIcon' src="./src/assets/bee-honey-icon.svg" alt="Beeyond" />
+          <img className='logoIcon' src="/bee-honey-icon.svg" alt="Beeyond" />
           <h1 className="title">
             <span className="logoFont">Beeyond</span>
           </h1>
