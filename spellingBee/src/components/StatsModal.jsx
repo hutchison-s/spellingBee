@@ -8,7 +8,7 @@ export default function StatsModal() {
     const [apiData, setApiData] = useState({})
 
     useEffect(()=>{
-        axios.get('https://beeyondwords.vercel.app/api/stats').then(res => {
+        axios.get('/api/stats').then(res => {
             setApiData(res.data)
         })
     }, [])
