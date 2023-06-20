@@ -11,7 +11,7 @@ mongoose
     .connect(uri, {useNewUrlParser: true}).catch(console.log)
     .then(()=>{
         const app = express();
-        app.use(cors())
+        app.use(cors({credentials: true}))
         const WordRouter = require('./routers/Router')
         app.get('/', function(req, res) {
             res.sendFile(path.join(__dirname, '/index.html'));
