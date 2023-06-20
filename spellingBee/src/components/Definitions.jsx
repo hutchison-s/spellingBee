@@ -51,7 +51,7 @@ export default function Definitions() {
     let config = {headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': 'Basic c3BlbGxpbmdiZWU6Y2hhbXBpb24xMDAh'}}
     const ops = [];
     for (let i=0; i<4; i++) {
-      const res = await axios.get('/api/random?grade='+currentLevel, config)
+      const res = await axios.get('https://beeyondwords.vercel.app/api/random?grade='+currentLevel, config)
       if (correctWords.includes(res.data.word)) {
         i--;
       } else {

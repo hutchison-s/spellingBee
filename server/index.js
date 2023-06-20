@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const cors = require('cors');
 require('dotenv').config();
 
 const uri = process.env.MONGO_URI;
@@ -10,6 +11,7 @@ mongoose
     .connect(uri, {useNewUrlParser: true}).catch(console.log)
     .then(()=>{
         const app = express();
+        app.use(cors())
         const WordRouter = require('./routers/Router')
         app.get('/', function(req, res) {
             res.sendFile(path.join(__dirname, '/index.html'));

@@ -24,7 +24,7 @@ export default function Spelling() {
 
   function getRandom() {
     let config = {headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': 'Basic c3BlbGxpbmdiZWU6Y2hhbXBpb24xMDAh'}}
-    axios.get('/api/random?grade='+currentLevel, config).then(response => {
+    axios.get('https://beeyondwords.vercel.app/api/random?grade='+currentLevel, config).then(response => {
       if (correctWords.includes(response.data.word)) {
         return getRandom();
       } else {
