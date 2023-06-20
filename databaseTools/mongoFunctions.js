@@ -133,10 +133,10 @@ async function main() {
     try {
         await client.connect()
         // await logWords(client.db("SpellingBeeWords").collection("words"), {etymology: null})
-        await addAllFromFile(client.db("SpellingBeeWords").collection("words"), './span.json')
+        // await addAllFromFile(client.db("SpellingBeeWords").collection("words"), './span.json')
         // await findDuplicates(client.db("SpellingBeeWords").collection("words"))
         // await deleteDup(client.db("SpellingBeeWords").collection("words"))
-        // await updateAll(client.db("SpellingBeeWords").collection("words"), {etymology: null}, {etymology: 'Latin'})
+        await updateAll(client.db("SpellingBeeWords").collection("words"), {part_of_speech: "Number"}, {part_of_speech: 'Noun'})
     } catch (err) {
         console.error(err);
     } finally {
