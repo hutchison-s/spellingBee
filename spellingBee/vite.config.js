@@ -9,6 +9,10 @@ export default defineConfig({
       '/api': {
         target: 'http://localhost:5000',
         changeOrigin: true
+      },
+      '/users': {
+        target: 'http://localhost:5000',
+        changeOrigin: true
       }
     }
   }

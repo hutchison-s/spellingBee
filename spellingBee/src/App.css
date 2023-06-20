@@ -72,6 +72,7 @@ article.appContainer {
   margin-left: 0.15em;
 }
 .appFont {
+  color: #f6db55;
   font-size: 2rem;
   letter-spacing: 0.4rem;
   font-weight: 200;

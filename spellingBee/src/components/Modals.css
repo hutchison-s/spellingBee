@@ -1,4 +1,5 @@
-#statsModal {
+#statsModal,
+#userModal {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -20,6 +21,10 @@
     margin: 2rem auto;
     font-size: 2.5rem;
 }
+.userPhoto {
+    border-radius: 50%;
+    margin: 1rem;
+}
 .statHead {
     margin: 1rem auto;
     color: var(--honey);
@@ -36,7 +41,25 @@
     gap: 1rem;
     height: 500px;
 }
-#statModalClose {
+#profileLevelSelect {
+    background: transparent;
+    border: 1px solid var(--honey);
+    padding: 0.5rem 2rem;
+    color: var(--almostwhite);
+    text-align: center;
+    border-radius: 1rem;
+}
+.gameData {
+    display: flex;
+    justify-content: space-evenly;
+}
+.gameDataHead {
+    font-weight: 300;
+    font-size: medium;
+    text-shadow: 0 0 10px var(--darkgold);
+    text-decoration: underline;
+}
+.modalClose {
     position: sticky;
     top: 0;
     left: 90%;
@@ -50,4 +73,12 @@
     place-items: center;
     border-radius: 50%;
     border: none;
+    z-index: 3;
+}
+.logoutBtn {
+    padding: 0.5rem 2rem;
+    color: var(--almostwhite);
+    background-color: var(--darkgold);
+    border: none;
+    border-radius: 1rem;
 }

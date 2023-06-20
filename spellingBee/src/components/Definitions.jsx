@@ -1,13 +1,13 @@
+import PropTypes from 'prop-types';
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export default function Definitions() {
+export default function Definitions({userData, setUserData}) {
+  const {score, correctWords, wrongWords} = userData.definitions;
+  const currentLevel = userData.definitions.level;
   const [currentWord, setCurrentWord] = useState('')
-  const [score, setScore] = useState(0)
   const [options, setOptions] = useState([]);
-  const [correctWords, setCorrectWords] = useState([]);
   const [streak, setStreak] = useState(0)
-  const [currentLevel, setCurrentLevel] = useState(3)
   const chime = document.getElementById('chime')
   const alarm = document.getElementById('alarm')
   const synth = window.speechSynthesis;
@@ -50,9 +50,13 @@ export default function Definitions() {
     
     let config = {headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': 'Basic c3BlbGxpbmdiZWU6Y2hhbXBpb24xMDAh'}}
     const ops = [];
+    const done = [];
+    for (const w in correctWords) {
+      done.push(w.word);
+    }
     for (let i=0; i<4; i++) {
       const res = await axios.get('/api/random?grade='+currentLevel, config)
-      if (correctWords.includes(res.data.word)) {
+      if (done.includes(res.data.word)) {
         i--
       } else {
         ops.push(res.data)
@@ -60,8 +64,6 @@ export default function Definitions() {
     }
     setOptions([...ops])
     const word = ops[Math.floor(Math.random() * ops.length)]
-    console.log(word)
-    console.log(ops)
     setCurrentWord(await word)
     pronounce(await word.word)
   }
@@ -85,11 +87,14 @@ export default function Definitions() {
         def.style.opacity = '0.1'
       }
     }
-    if (score < Math.floor(currentWord.gradeLevel / 2)) {
-      setScore(0)
-    } else {
-      setScore(score => score - Math.floor(currentWord.gradeLevel / 2))
-    }
+    setUserData({
+      ...userData,
+      definitions: {
+        ...userData.definitions,
+        score: (score < Math.floor(currentWord.gradeLevel / 2)) ? 0 : score - Math.floor(currentWord.gradeLevel / 2),
+        wrongWords: [...wrongWords, currentWord]
+      }
+    })
     setStreak(0)
     setTimeout(()=>{
       for (let def of defs) {
@@ -102,21 +107,23 @@ export default function Definitions() {
 
   function rightAnswer() {
     let box = document.getElementById('currentWord');
-    box.style.background = "cornsilk";
-    box.style.color = 'darkblue'
+    box.style.background = "var(--almostwhite)";
+    box.style.color = 'var(--raisin)'
     let check = document.getElementById('checkMark');
     check.style.scale = '1.5';
-    setScore(score => score + Math.floor(currentWord.gradeLevel / 2))
-    setCorrectWords([...correctWords, currentWord.word])
-    setStreak(streak => streak + 1);
-    console.log(streak);
-    if (streak > 9) {
-      setCurrentLevel(levels[currentLevel].next);
-      setStreak(0);
-    }
+    setUserData({
+      ...userData,
+      definitions: {
+        ...userData.definitions,
+        score: score + Math.floor(currentWord.gradeLevel / 2),
+        correctWords: [...correctWords, currentWord],
+        level: streak > 9 ? levels[currentLevel].next : currentLevel
+      }
+    })
+    setStreak(streak => streak > 9 ? 0 : streak + 1);
     setTimeout(()=>{
       box.style.background = 'initial';
-      box.style.color = '#EDF2EF'
+      box.style.color = 'var(--almostwhite)'
       check.style.scale = '0'
       getOptions();
     }, 2000)
@@ -151,4 +158,9 @@ export default function Definitions() {
             <button className='warning' onClick={()=>{setStreak(0); getOptions()}}>Skip</button>
       </article>
   )
+}
+
+Definitions.propTypes = {
+  userData: PropTypes.object,
+  setUserData: PropTypes.func
 }

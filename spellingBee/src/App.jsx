@@ -1,44 +1,72 @@
-import { useState } from 'react'
-import Spelling from './components/Spelling';
-import Definitions from './components/Definitions';
-import StatsModal from './components/StatsModal';
+import { useState } from 'react';
+import Games from './Games';
+import Login from './Login';
+import { googleLogout } from '@react-oauth/google';
+import { useEffect } from 'react';
+import axios from 'axios';
 import './App.css'
 
-function App() {
-  const [currentApp, setCurrentApp] = useState('Spelling')
-  
-  function returnApp(choice) {
-    switch (choice) {
-      case 'Spelling':
-        return <Spelling />;
-      case 'Definitions':
-        return <Definitions />
-    }
+const initialUserData = {
+  spelling: {
+      score: 0,
+      level: 3,
+      correctWords: [],
+      wrongWords: []
+  },
+  definitions: {
+      score: 0,
+      level: 3,
+      correctWords: [],
+      wrongWords: []
   }
+}
+
+function App() {
+  const [ user, setUser ] = useState(null);
+  const [ profile, setProfile ] = useState({});
+  const [userData, setUserData] = useState(initialUserData);
+  let config = {method: 'post', headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': 'Basic c3BlbGxpbmdiZWU6Y2hhbXBpb24xMDAh'}}
+
+  useEffect(
+    () => {
+        if (user) {
+          if (user === "Guest") {
+            setProfile({name: "Guest", email: "None", sub: "guest"});
+            return;
+          }
+          
+            axios
+                .get(`https://www.googleapis.com/oauth2/v3/userinfo`, {
+                    headers: {
+                        Authorization: `Bearer ${user.access_token}`,
+                        Accept: 'application/json'
+                    }
+                })
+                .then((res) => {
+                    setProfile(res.data);
+                    axios.get('/users/'+res.data.sub, config).then(response => {
+                      setUserData(response.data)
+                    }).catch(err => console.log(err))
+                })
+                .catch((err) => console.log(err));
+        }
+    },
+    [ user ]
+);
+
+  const logOut = () => {
+    googleLogout();
+    setProfile(null);
+    setUser(null);
+    setUserData(initialUserData);
+    console.log("logged out")
+  };  
 
   return (
     <>
-      <header>
-        <div className="logoContainer">
-          <img className='logoIcon' src="/bee-honey-icon.svg" alt="Beeyond" />
-          <h1 className="title">
-            <span className="logoFont">Beeyond</span>
-          </h1>
-          <select name="appChoice" id="appChoice" className='appFont' defaultValue='Spelling' onInput={(e)=>{setCurrentApp(e.target.value)}}>
-          <option value="Spelling">Spelling</option>
-          <option value="Definitions">Definitions</option>
-        </select>
-        </div>
-      </header>
-      {returnApp(currentApp)}
-      <StatsModal />
-      <footer>
-        <nav>
-          <div><a href="#"><i className="bi bi-person-circle"></i></a></div>
-          <div><a onClick={()=>{document.getElementById('statsModal').showModal()}}><i className="bi bi-bar-chart-line-fill"></i></a></div>
-          <div><a href="###"><i className="bi bi-info-circle"></i></a></div>
-        </nav>
-      </footer>
+      {user
+        ? <Games logOut={logOut} profile={profile} userData={userData} setUserData={setUserData}/>
+        : <Login setUser={setUser} />}
     </>
   )
 }
