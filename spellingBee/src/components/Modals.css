@@ -22,15 +22,16 @@
 }
 .modalTitle {
     margin: 2rem auto;
-    font-size: 2.5rem;
+    font-size: 2.75rem;
 }
 .userPhoto {
     border-radius: 50%;
     margin: 1rem;
 }
-.statHead {
-    margin: 1rem auto;
+.modalSectionHead {
+    margin: 2rem auto 1rem;
     color: var(--honey);
+    font-size: 2rem;
 }
 .statChart {
     margin: 1rem auto 3rem;
@@ -56,11 +57,17 @@
     display: flex;
     justify-content: space-evenly;
 }
-.gameDataHead {
+.modalSubHead {
     font-weight: 300;
     font-size: medium;
     text-shadow: 0 0 10px var(--darkgold);
     text-decoration: underline;
+}
+.modalList {
+    text-align: left;
+}
+.modalList > li {
+    margin-bottom: 0.75rem;
 }
 .modalClose {
     position: sticky;

@@ -19,14 +19,14 @@ export default function StatsModal() {
             if (category === "words") {
                 response.push(
                     <>
-                        <h4 className='statHead'>Total Words</h4>
+                        <h4 className='modalSectionHead'>Total Words</h4>
                         <h5 className='statNumber'>{apiData[category]}</h5>
                     </>
                 )
             } else {
                 response.push(
                         <>
-                        <h4 className='statHead'>{category}</h4>
+                        <h4 className='modalSectionHead'>{category}</h4>
                         <div className="statChart">
                             <WordPieChart dataset={apiData[category]}/>
                         </div>
