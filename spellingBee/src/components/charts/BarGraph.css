@@ -1,0 +1,46 @@
+.graphFrame {
+    width: 100%;
+    max-width: 500px;
+    padding: 1rem 0;
+    margin: 2rem 0;
+    border: 1px solid #ffffff88;
+    border-radius: 0.5rem;
+}
+.graphTitle {
+    font-size: x-large;
+    text-align: center;
+    width: 100%;
+    margin: 0.5rem 0 1rem;
+    color: #ffffffaa;
+}
+.graphContainer {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    margin: 0.5rem;
+    color: #ffffffdd;
+}
+.dataLabelContainer,
+.dataBarContainer {
+    width: 100%;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.25rem;
+}
+.dataLabel {
+    border-right: 1px solid #fff;
+    margin: 0;
+    padding: 0.5rem 0.25rem;
+}
+.dataBar {
+    padding: 0.5rem 0.25rem;
+    min-height: 2.5rem;
+    position: relative;
+}
+.dataBar span {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    right: 0;
+}

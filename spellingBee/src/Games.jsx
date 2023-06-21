@@ -44,7 +44,7 @@ export default function Games({logOut, profile, userData, setUserData}) {
                 </div>
             </header>
             {returnApp(currentApp)}
-            <StatsModal />
+            <StatsModal userData={userData}/>
             <UserModal logOut={logOut} profile={profile} userData={userData}/>
             <InfoModal />
             <footer>
