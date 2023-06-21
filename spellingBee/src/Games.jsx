@@ -5,6 +5,7 @@ import Spelling from './components/Spelling';
 import Definitions from './components/Definitions';
 import StatsModal from './components/StatsModal';
 import UserModal from './components/UserModal';
+import InfoModal from './components/InfoModal';
 
 
 
@@ -45,11 +46,12 @@ export default function Games({logOut, profile, userData, setUserData}) {
             {returnApp(currentApp)}
             <StatsModal />
             <UserModal logOut={logOut} profile={profile} userData={userData}/>
+            <InfoModal />
             <footer>
                 <nav>
                 <div><a onClick={()=>{document.getElementById('userModal').showModal()}}><i className="bi bi-person-circle"></i></a></div>
                 <div><a onClick={()=>{document.getElementById('statsModal').showModal()}}><i className="bi bi-bar-chart-line-fill"></i></a></div>
-                <div><a href="###"><i className="bi bi-info-circle"></i></a></div>
+                <div><a onClick={()=>{document.getElementById('infoModal').showModal()}}><i className="bi bi-info-circle"></i></a></div>
                 </nav>
             </footer>
         </>
