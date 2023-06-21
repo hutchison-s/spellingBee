@@ -132,7 +132,7 @@ export default function Spelling({userData, setUserData}) {
               <p id="correctSpelling" className=""></p>
               <form className='' onSubmit={checkSpelling}>
                 <label className='' htmlFor='spelling'>{Math.floor(currentWord.gradeLevel / 2)} point word</label>
-                <input type="text" autoComplete='false' className='' name='spelling' id='spelling'/>
+                <input type="text" autoComplete='off' pattern='\s*\w+-*\w*\s*' title='Please use only letters and/or hyphen characters.' name='spelling' id='spelling'/>
                 <button className='primary' type='submit'>Check</button>
               </form>
             </div>
