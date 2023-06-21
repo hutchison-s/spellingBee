@@ -1,5 +1,6 @@
 #statsModal,
-#userModal {
+#userModal,
+#infoModal {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -14,20 +15,23 @@
     padding: 2rem 1rem;
     border-radius: 1rem;
 }
-#statsModal::backdrop {
+#statsModal::backdrop,
+#userModal::backdrop,
+#infoModal::backdrop {
     background-color: #22222288;
 }
 .modalTitle {
     margin: 2rem auto;
-    font-size: 2.5rem;
+    font-size: 2.75rem;
 }
 .userPhoto {
     border-radius: 50%;
     margin: 1rem;
 }
-.statHead {
-    margin: 1rem auto;
+.modalSectionHead {
+    margin: 2rem auto 1rem;
     color: var(--honey);
+    font-size: 2rem;
 }
 .statChart {
     margin: 1rem auto 3rem;
@@ -53,11 +57,17 @@
     display: flex;
     justify-content: space-evenly;
 }
-.gameDataHead {
+.modalSubHead {
     font-weight: 300;
     font-size: medium;
     text-shadow: 0 0 10px var(--darkgold);
     text-decoration: underline;
+}
+.modalList {
+    text-align: left;
+}
+.modalList > li {
+    margin-bottom: 0.75rem;
 }
 .modalClose {
     position: sticky;
