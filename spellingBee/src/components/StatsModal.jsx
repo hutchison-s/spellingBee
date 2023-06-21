@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from "react";
 import WordPieChart from "./WordPieChart";
-import './StatsModal.css'
+import './Modals.css'
 
 export default function StatsModal() {
 
@@ -40,7 +40,7 @@ export default function StatsModal() {
     return (
         <dialog id="statsModal">
             <button 
-                id="statModalClose"
+                className='modalClose'
                 onClick={()=>{
                     document.getElementById('statsModal').close();
                 }}><i className="bi bi-x-circle-fill"></i></button>
