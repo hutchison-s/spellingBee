@@ -14,7 +14,7 @@ export default function Games({logOut, profile, userData, setUserData}) {
 
     useEffect(()=>{
         if (profile) {
-            axios.post('/users/'+profile.sub, userData, config)
+            axios.post('https://beeyondwords.vercel.app/users/'+profile.sub, userData, config)
                 .catch(err => console.log(err))
         }
     }, [userData])

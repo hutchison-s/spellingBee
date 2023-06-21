@@ -55,7 +55,7 @@ export default function Definitions({userData, setUserData}) {
       done.push(w.word);
     }
     for (let i=0; i<4; i++) {
-      const res = await axios.get('/api/random?grade='+currentLevel, config)
+      const res = await axios.get('https://beeyondwords.vercel.app/api/random?grade='+currentLevel, config)
       if (done.includes(res.data.word)) {
         i--
       } else {

@@ -1,7 +1,6 @@
 import './Login.css';
 import PropTypes from 'prop-types';
 import { useGoogleLogin } from '@react-oauth/google';
-// import axios from 'axios';
 
 export default function Login({setUser}) {
     const login = useGoogleLogin({

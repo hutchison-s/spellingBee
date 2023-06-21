@@ -44,7 +44,7 @@ function App() {
                 })
                 .then((res) => {
                     setProfile(res.data);
-                    axios.get('/users/'+res.data.sub, config).then(response => {
+                    axios.get('https://beeyondwords.vercel.app/users/'+res.data.sub, config).then(response => {
                       setUserData(response.data)
                     }).catch(err => console.log(err))
                 })
