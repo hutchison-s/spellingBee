@@ -18,7 +18,13 @@ const initialUserData = {
       level: 3,
       correctWords: [],
       wrongWords: []
-  }
+  },
+  likeness: {
+    score: 0,
+    level: 3,
+    correctWords: [],
+    wrongWords: []
+}
 }
 
 function App() {

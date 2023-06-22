@@ -12,7 +12,7 @@ export default function InfoModal() {
             <h2 className='modalTitle'>Beeyond Info</h2>
             <h3 className='modalSectionHead'>Features</h3>
             <ul className='modalList'>
-                <li>Two Language-Learning Apps</li>
+                <li>Three Language-Learning Apps</li>
                 <li>Login with Google to save progress</li>
                 <li>Four levels of increasing difficulty</li>
                 <li>Points for each correct answer</li>
@@ -33,6 +33,14 @@ export default function InfoModal() {
             <ul className="modalList">
                 <li>Words are displayed and spoken.</li>
                 <li>Choose correct definition from options in blue.</li>
+                <li>If incorrect, the correct definition will be highlighted before continuing.</li>
+            </ul>
+            <h3 className="modalSectionHead">Likeness</h3>
+            <p>Beeyond Likeness sharpens users&apos; cognitive and linguistic skills by stimulating their critical thinking and honing their ability to discern subtle differences among words, fostering vocabulary growth and a deeper comprehension of word meanings.</p>
+            <h4 className="modalSubHead">Tips</h4>
+            <ul className="modalList">
+                <li>Words are displayed and spoken.</li>
+                <li>Choose the option that is least related to the given word from the adjectives in blue.</li>
                 <li>If incorrect, the correct definition will be highlighted before continuing.</li>
             </ul>
             <h3 className="modalSectionHead">Score & Levels</h3>
