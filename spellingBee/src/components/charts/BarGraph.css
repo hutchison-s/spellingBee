@@ -31,12 +31,15 @@
 .dataLabel {
     border-right: 1px solid #fff;
     margin: 0;
-    padding: 0.5rem 0.25rem;
+    padding: 0.5rem 0.5rem;
 }
 .dataBar {
     padding: 0.5rem 0.25rem;
     min-height: 2.5rem;
     position: relative;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    box-shadow: 0 0 5px #000000a3 inset;
 }
 .dataBar span {
     display: inline-block;

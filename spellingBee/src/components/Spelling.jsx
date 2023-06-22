@@ -128,7 +128,7 @@ export default function Spelling({userData, setUserData}) {
             <h3 id="level">Level: {levelToWord(currentLevel)}</h3>
             <i id='checkMark' className="bi bi-check-circle-fill"></i>
           <section className="">
-            <div className="">
+            <div id="spellingInputContainer">
               <p id="correctSpelling" className=""></p>
               <form className='' onSubmit={checkSpelling}>
                 <label className='' htmlFor='spelling'>{currentWord ? Math.floor(currentWord.gradeLevel / 2)+" point word" : "Fetching a word..."}</label>

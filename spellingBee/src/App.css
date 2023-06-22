@@ -16,14 +16,19 @@
   --honey: #f6db55;
   --darkgold: #9C6D3A;
 }
+body {
+  width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image: linear-gradient(#212738, #171B27);
+  color: #EDF2EF;
+}
 #root {
   max-width: 1280px;
   min-height: 100vh;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  background-image: linear-gradient(#212738, #171B27);
-  color: #EDF2EF;
 }
 article.appContainer {
   display: grid;
@@ -97,8 +102,10 @@ article.appContainer {
   width: fit-content;
   text-align: center;
 }
-
-
+button,
+a {
+  cursor: pointer;
+}
 button:focus-visible,
 a:focus-visible {
   outline: 4px solid #f6db55;
@@ -202,4 +209,123 @@ footer a {
 footer a:hover {
   opacity: 1;
   scale: 1.1;
+}
+
+@media screen and (min-width: 600px) {
+  #score,
+  #level {
+    font-size: 2rem;
+    top: 3vh;
+  }
+  #score {
+    left: 10vw;
+  }
+  #level {
+    right: 10vw;
+  }
+  .logoContainer {
+    scale: 1.5;
+    margin-top: 15vh;
+    margin-bottom: 2rem; 
+  }
+  .speechContainer,
+  .defContainer {
+    width: 80vw;
+    max-width: 900px;
+  }
+  button.primary {
+    font-size: 2rem;
+    padding: 0.5rem 2.5rem;
+  }
+  #currentWord {
+    font-size: 3rem
+  }
+  button.speech,
+  button.definition {
+    font-size: larger;
+    padding: 1rem;
+  }
+  button.warning {
+    font-size: larger;
+    padding: 0.5rem 2.5rem;
+  }
+}
+
+@media screen and (max-height: 900px) and (min-width: 600px) {
+  .logoContainer {
+    scale: 1;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  .speechContainer {
+    max-width: 50vw;
+  }
+  button.speech {
+    font-size: initial;
+    padding: 0.4rem 1.2rem;
+  }
+}
+
+@media screen and (max-height: 500px) and (min-width: 600px) {
+  #score,
+  #level {
+    font-size: large;
+  }
+  .logoContainer {
+    position: fixed;
+    top: 5vh;
+    left: 5vw;
+  }
+  #spellingInputContainer {
+    position: fixed;
+    left: 6vw;
+    top: 40vh;
+  }
+  button.primary {
+    font-size: large;
+    padding: 0.5rem 2rem;
+    transform: translateY(-50%)
+  }
+  .speechContainer,
+  .defContainer {
+    position: fixed;
+    right: 60px;
+    top: 0;
+    height: 100vh;
+    max-width: 45vw;
+    grid-auto-rows: 1fr;
+    padding: 4rem 1rem;
+  }
+  footer > nav {
+    right: 0;
+    left: unset;
+    translate: 0;
+    top: 0;
+    width: 60px;
+    height: 100vh;
+    flex-direction: column;
+    padding: 2rem 0;
+  }
+  button.warning {
+    position: fixed;
+    bottom: 0vh;
+    left: 17vw;
+    font-size: medium;
+    padding: 0.25rem 2rem;
+  }
+  #currentWord {
+    position: fixed;
+    left: 14vw;
+    top: 50vh;
+    font-size: large;
+  }
+  button.definition {
+    font-size: medium;
+    padding: 0.25rem 0.5rem;
+  }
+  .appContainer small {
+    position: fixed;
+    left: 18vw;
+    top: 40vh;
+  }
 }
