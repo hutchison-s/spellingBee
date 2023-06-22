@@ -1,0 +1,1 @@
+GET https://api.datamuse.com/words?rel_jjb=whisper&max=10

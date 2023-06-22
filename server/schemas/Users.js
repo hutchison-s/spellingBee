@@ -54,6 +54,30 @@ const userSchema = new Schema({
                     gradeLevel: Number
                 }
             ]
+        },
+        likeness: {
+            score: Number,
+            level: Number,
+            correctWords: [
+                {
+                    word: String,
+                    definition: String,
+                    part_of_speech: String,
+                    etymology: String,
+                    example_sentence: String,
+                    gradeLevel: Number
+                }
+            ],
+            wrongWords: [
+                {
+                    word: String,
+                    definition: String,
+                    part_of_speech: String,
+                    etymology: String,
+                    example_sentence: String,
+                    gradeLevel: Number
+                }
+            ]
         }
     }
 })

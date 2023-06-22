@@ -14,7 +14,13 @@ const emptyGameData = {
       level: 3,
       correctWords: [],
       wrongWords: []
-  }
+  },
+  likeness: {
+    score: 0,
+    level: 3,
+    correctWords: [],
+    wrongWords: []
+}
 }
 
 userRouter.use((req, res, next) => {
