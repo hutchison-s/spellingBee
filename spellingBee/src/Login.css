@@ -7,13 +7,14 @@ article:has(.loginButtons) {
 }
 .loginButtons {
     display: grid;
-    gap: 1rem;
+    gap: 2rem;
+    margin-top: 2rem;
 }
 .loginButtons button:first-of-type {
     background: var(--brightblue);
     color: var(--almostwhite);
     border: 2px solid var(--honey);
-    padding: 0.25rem 2rem;
+    padding: 0.5rem 2rem;
     border-radius: 1rem;
 }
 .loginLogo .logoIcon {
@@ -38,4 +39,14 @@ article:has(.loginButtons) {
 @keyframes float {
     from {translate: -50% -50%}
     to {translate: -50% -40%}
+}
+
+@media screen and (min-width: 900px) {
+    .logoContainer.loginLogo {
+        scale: 2.5;
+        transform: translateY(50%)
+    }
+    @keyframes raise {
+        to {transform: translateY(-20%); scale: 2}
+    }
 }
