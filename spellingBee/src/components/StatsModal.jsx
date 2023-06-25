@@ -89,7 +89,6 @@ export default function StatsModal({userData}) {
 
   useEffect(()=>{
     setStats(getStats())
-    console.log(userData)
   }, [userData])
 
 

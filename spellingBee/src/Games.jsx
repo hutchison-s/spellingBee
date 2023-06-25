@@ -19,7 +19,6 @@ export default function Games({logOut, profile, userData, setUserData}) {
             axios.post('https://beeyondwords.vercel.app/users/'+profile.sub, userData, config)
                 .catch(err => console.log(err))
         }
-        console.log(userData)
     }, [userData])
 
     function returnApp(choice) {

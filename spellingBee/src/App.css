@@ -110,7 +110,8 @@ button:focus-visible,
 a:focus-visible {
   outline: 4px solid #f6db55;
 }
-#currentWord {
+#currentWord,
+.honeyWord {
   font-size: 2rem;
   border: 1px solid #f6db55;
   background: transparent;
@@ -237,7 +238,8 @@ footer a:hover {
     font-size: 2rem;
     padding: 0.5rem 2.5rem;
   }
-  #currentWord {
+  #currentWord,
+  .honeyWord {
     font-size: 3rem
   }
   button.speech,
@@ -313,7 +315,8 @@ footer a:hover {
     font-size: medium;
     padding: 0.25rem 2rem;
   }
-  #currentWord {
+  #currentWord,
+  .honeyWord {
     position: fixed;
     left: 14vw;
     top: 50vh;
