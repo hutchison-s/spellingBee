@@ -8,6 +8,7 @@ export default function StatsModal({userData}) {
   
   function getStats() {
     const userStats = {
+        games: {},
         part: {},
         etym: {},
         words: 0
@@ -32,6 +33,14 @@ export default function StatsModal({userData}) {
             } else {
                 userStats.etym[w.etymology].correct += 1;
             }
+            if (!userStats.games[game]) {
+              userStats.games[game] = {
+                  correct: 1,
+                  wrong: 0
+              }   
+          } else {
+              userStats.games[game].correct += 1;
+          }
         }
         for (const w of userData[game].wrongWords) {
             userStats.words++
@@ -51,6 +60,14 @@ export default function StatsModal({userData}) {
             } else {
                 userStats.etym[w.etymology].wrong += 1;
             }
+            if (!userStats.games[game]) {
+              userStats.games[game] = {
+                  correct: 0,
+                  wrong: 1
+              }   
+          } else {
+              userStats.games[game].wrong += 1;
+          }
         }
     }
 
@@ -62,7 +79,11 @@ export default function StatsModal({userData}) {
     for (const lang in userStats.etym) {
         etymologyData[lang] = (userStats.etym[lang].correct / (userStats.etym[lang].correct + userStats.etym[lang].wrong)).toFixed(2) * 100
     }
-    return {totalWords: userStats.words, parts_of_speech: partsData, etymologies: etymologyData}
+    const gamesData = {};
+    for (const game in userStats.games) {
+        gamesData[game] = (userStats.games[game].correct / (userStats.games[game].correct + userStats.games[game].wrong)).toFixed(2) * 100
+    }
+    return {totalWords: userStats.words, parts_of_speech: partsData, etymologies: etymologyData, games: gamesData}
 
   }
 
@@ -98,6 +119,7 @@ export default function StatsModal({userData}) {
         ?   <>
                 <h2 className="modalSectionHead">Total Words:</h2>
                 <h3>{stats.totalWords}</h3>
+                <BarGraph data={stats.gamesData} title={'Games'} />
                 <BarGraph data={stats.parts_of_speech} title='Parts of Speech' />
                 <BarGraph data={stats.etymologies} title='Etymologies' />
             </>
