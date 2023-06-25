@@ -7,6 +7,8 @@ const wordSchema = new Schema({
     definition: String,
     etymology: String,
     example_sentence: String,
+    synonyms: [String],
+    antonyms: [String],
     gradeLevel: Number
 })
 

@@ -17,6 +17,15 @@ async function addAllFromFile(collection, fileName) {
     }
 }
 
+// Add synonyms and antonyms from file to matching words in database
+async function addComparisons(collection, fileName) {
+    const file = await JSON.parse(fs.readFileSync(fileName, 'utf-8'));
+    for await (const word of file.words) {
+        let regex = new RegExp('^'+word.word+'$', "i")
+        await collection.findOneAndUpdate({word: regex}, {$set: {synonyms: [...word.synonyms], antonyms: [...word.antonyms]}})
+    }
+}
+
 // Update all matching documents
 
 async function updateAll(collection, filter, update) {
@@ -44,11 +53,7 @@ async function capitalizeValues(collection) {
         let part = toTitleCase(w.part_of_speech);
         let ety = toTitleCase(w.etymology);
         let examp = toTitleCase(w.example_sentence);
-        await collection.updateOne({_id: w._id}, {$set: {word: word, definition: def, part_of_speech: part, etymology: ety, example_sentence: examp}})    
-        // await collection.updateOne({_id: w._id}, {$set: {definition: def}})    
-        // await collection.updateOne({_id: w._id}, {$set: {part_of_speech: part}})    
-        // await collection.updateOne({_id: w._id}, {$set: {etymology: ety}})    
-        // await collection.updateOne({_id: w._id}, {$set: {example_sentence: examp}})    
+        await collection.updateOne({_id: w._id}, {$set: {word: word, definition: def, part_of_speech: part, etymology: ety, example_sentence: examp}})      
         console.log('Updated', w)
     }
 }
@@ -132,11 +137,12 @@ async function main() {
 
     try {
         await client.connect()
-        await logWords(client.db("SpellingBeeWords").collection("words"), {part_of_speech: "Adjective"})
-        // await addAllFromFile(client.db("SpellingBeeWords").collection("words"), './span.json')
+        await logWords(client.db("SpellingBeeWords").collection("words"), {etymology: /.*derived.*/i})
+        // await addAllFromFile(client.db("SpellingBeeWords").collection("words"), './sixteens.json')
+        // await addComparisons(client.db("SpellingBeeWords").collection("words"), './addComparatives.json')
         // await findDuplicates(client.db("SpellingBeeWords").collection("words"))
         // await deleteDup(client.db("SpellingBeeWords").collection("words"))
-        // await updateAll(client.db("SpellingBeeWords").collection("words"), {part_of_speech: "Number"}, {part_of_speech: 'Noun'})
+    // await updateAll(client.db("SpellingBeeWords").collection("words"), {etymology: /.*named.*/i}, {etymology: 'Eponym'})
     } catch (err) {
         console.error(err);
     } finally {
