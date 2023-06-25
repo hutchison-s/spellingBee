@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import axios from "axios"
 import { useState, useEffect } from "react"
 
-export default function Spelling({userData, setUserData}) {
+export default function Spelling({userData, setUserData, key}) {
   const {score, correctWords, wrongWords} = userData.spelling;
   const currentLevel = userData.spelling.level;
   const [currentWord, setCurrentWord] = useState('')
@@ -28,7 +28,7 @@ export default function Spelling({userData, setUserData}) {
     for (const w in correctWords) {
       done.push(w.word);
     }
-    let config = {headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': 'Basic c3BlbGxpbmdiZWU6Y2hhbXBpb24xMDAh'}}
+    let config = {headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': key}}
     axios.get('https://beeyondwords.vercel.app/api/random?grade='+currentLevel, config).then(response => {
       if (done.includes(response.data.word)) {
         return getRandom();
@@ -156,5 +156,6 @@ return 'Expert';
 
 Spelling.propTypes = {
   userData: PropTypes.object,
-  setUserData: PropTypes.func
+  setUserData: PropTypes.func,
+  key: PropTypes.string
 }

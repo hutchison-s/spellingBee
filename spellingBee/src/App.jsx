@@ -29,15 +29,20 @@ const initialUserData = {
 
 function App() {
   const [ user, setUser ] = useState(null);
+  const [ key, setKey ] = useState(null);
   const [ profile, setProfile ] = useState({});
   const [userData, setUserData] = useState(initialUserData);
-  let config = {method: 'post', headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': 'Basic c3BlbGxpbmdiZWU6Y2hhbXBpb24xMDAh'}}
 
   useEffect(
     () => {
         if (user) {
           if (user === "Guest") {
             setProfile({name: "Guest", email: "None", sub: "guest"});
+            let config = {method: 'get', headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}}
+            axios.get('https://beeyondwords.vercel.app/users/guest', config).then(response => {
+                      setUserData(response.data.gameData)
+                      setKey("Basic "+btoa(response.data.username+":"+response.data.password))
+                    }).catch(err => console.log(err))
             return;
           }
           
@@ -50,8 +55,10 @@ function App() {
                 })
                 .then((res) => {
                     setProfile(res.data);
+                    let config = {method: 'get', headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}}
                     axios.get('https://beeyondwords.vercel.app/users/'+res.data.sub, config).then(response => {
-                      setUserData(response.data)
+                      setUserData(response.data.gameData)
+                      setKey("Basic "+btoa(response.data.username+":"+response.data.password))
                     }).catch(err => console.log(err))
                 })
                 .catch((err) => console.log(err));
@@ -71,7 +78,7 @@ function App() {
   return (
     <>
       {user
-        ? <Games logOut={logOut} profile={profile} userData={userData} setUserData={setUserData}/>
+        ? <Games logOut={logOut} profile={profile} userData={userData} setUserData={setUserData} key={key}/>
         : <Login setUser={setUser} />}
     </>
   )

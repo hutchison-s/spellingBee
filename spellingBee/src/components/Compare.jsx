@@ -2,7 +2,7 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 
-export default function Compare({ userData, setUserData }) {
+export default function Compare({ userData, setUserData, key }) {
   const { score, correctWords, wrongWords } = userData.compare;
   const currentLevel = userData.compare.level;
   const [currentWord, setCurrentWord] = useState(null);
@@ -16,7 +16,7 @@ export default function Compare({ userData, setUserData }) {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: "Basic c3BlbGxpbmdiZWU6Y2hhbXBpb24xMDAh",
+      Authorization: key,
     },
   };
 
@@ -230,4 +230,5 @@ export default function Compare({ userData, setUserData }) {
 Compare.propTypes = {
   userData: PropTypes.object,
   setUserData: PropTypes.func,
+  key: PropTypes.string
 };

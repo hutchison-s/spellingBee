@@ -8,8 +8,6 @@ export default function Login({setUser}) {
         onError: (error) => console.log('Login Failed:', error)
     });
 
-    
-
     return (
         <article>
             <div className="logoContainer loginLogo">
@@ -21,7 +19,6 @@ export default function Login({setUser}) {
             </div>
             <div id="loginOptions">
                 <h2>Login to Continue</h2>
-                <p>{status}</p>
                 <section className="loginButtons">
                     <button onClick={login}>Login <i className="bi bi-google"></i></button>
                     <a onClick={()=>{

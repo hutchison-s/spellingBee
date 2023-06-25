@@ -23,6 +23,30 @@ const emptyGameData = {
 }
 }
 
+userRouter.get('/:sub', (req, res) => {
+  Users.findOne({sub: req.params.sub})
+      .then(response => {
+          if (!response) {
+              Users.create({
+                  username: process.env.NEW_USER,
+                  password: process.env.NEW_PASS,
+                  authLevel: 1,
+                  sub: req.params.sub,
+                  gameData: {...emptyGameData}
+              }).then(result => {res.send(result)}).catch(err => console.log(err))
+          } else if (response === 'guest') {
+              Users.findOneAndUpdate({sub: req.params.sub}, {
+                $set: {
+                  gameData: {...emptyGameData}
+                }})
+                  .then(response => res.send(response))
+                  .catch(err => console.log(err))
+          } else {
+              res.send(response)
+          }
+      }).catch(err => console.log(err))
+})
+
 userRouter.use((req, res, next) => {
     let authHead = req.headers.authorization;
     if (!authHead) {
@@ -54,30 +78,6 @@ userRouter.use((req, res, next) => {
       }).catch(err => {
         return next(err)
       })
-  })
-
-  userRouter.get('/:sub', (req, res) => {
-    Users.findOne({sub: req.params.sub})
-        .then(response => {
-            if (!response) {
-                Users.create({
-                    username: 'spellingbee',
-                    password: 'champion100!',
-                    authLevel: 1,
-                    sub: req.params.sub,
-                    gameData: {...emptyGameData}
-                }).then(result => {res.send(result.gameData)}).catch(err => console.log(err))
-            } else if (response === 'guest') {
-                Users.findOneAndUpdate({sub: req.params.sub}, {
-                  $set: {
-                    gameData: {...emptyGameData}
-                  }})
-                    .then(response => res.send(response.gameData))
-                    .catch(err => console.log(err))
-            } else {
-                res.send(response.gameData)
-            }
-        }).catch(err => console.log(err))
   })
 
   userRouter.post('/:sub', (req, res) => {

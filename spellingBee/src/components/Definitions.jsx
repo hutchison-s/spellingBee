@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export default function Definitions({userData, setUserData}) {
+export default function Definitions({userData, setUserData, key}) {
   const {score, correctWords, wrongWords} = userData.definitions;
   const currentLevel = userData.definitions.level;
   const [currentWord, setCurrentWord] = useState('')
@@ -51,7 +51,7 @@ return 'Expert';
 
   async function getOptions() {
     
-    let config = {headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': 'Basic c3BlbGxpbmdiZWU6Y2hhbXBpb24xMDAh'}}
+    let config = {headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': key}}
     const ops = [];
     const done = [];
     for (const w in correctWords) {
@@ -165,5 +165,6 @@ return 'Expert';
 
 Definitions.propTypes = {
   userData: PropTypes.object,
-  setUserData: PropTypes.func
+  setUserData: PropTypes.func,
+  key: PropTypes.string
 }
