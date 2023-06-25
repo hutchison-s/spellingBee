@@ -89,6 +89,7 @@ export default function StatsModal({userData}) {
 
   useEffect(()=>{
     setStats(getStats())
+    console.log(userData)
   }, [userData])
 
 
@@ -119,7 +120,7 @@ export default function StatsModal({userData}) {
         ?   <>
                 <h2 className="modalSectionHead">Total Words:</h2>
                 <h3>{stats.totalWords}</h3>
-                <BarGraph data={stats.gamesData} title={'Games'} />
+                <BarGraph data={stats.games} title='Games' />
                 <BarGraph data={stats.parts_of_speech} title='Parts of Speech' />
                 <BarGraph data={stats.etymologies} title='Etymologies' />
             </>
