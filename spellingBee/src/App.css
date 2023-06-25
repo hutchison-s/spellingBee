@@ -34,6 +34,7 @@ article.appContainer {
   display: grid;
   place-items: center;
   min-height: 60vh;
+  padding-bottom: 50px;
 }
 
 #score,
@@ -94,14 +95,57 @@ article.appContainer {
   z-index: 0;
   opacity: 0.3;
 }
-#appChoice {
-  background: transparent;
-  color: #f6db55;
-  padding: 0.25rem;
-  border: none;
-  width: fit-content;
-  text-align: center;
+#appSelector {
+  position: relative;
+  max-width: 400px;
+  margin: 0 auto;
+  cursor: pointer;
 }
+#appSelector:has(.dropdown:not(.hidden)) {
+  background-color: var(--raisin);
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  border: 1px solid var(--honey);
+}
+#appSelector button {
+  all: unset;
+  color: var(--honey);
+  position: absolute;
+  top: 50%;
+  right: 0;
+  translate: -20% -50%;
+}
+#appSelector .dropdown {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  translate: 0 100%;
+  padding: 3rem 1rem 3rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background-image: linear-gradient(var(--raisin), var(--darkblue));
+  transition: all 0.2s linear;
+  overflow: hidden;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  border: 1px solid var(--honey);
+  display: grid;
+  gap: 2rem;
+  color: var(--almostwhite);
+  box-shadow: 4px 30px 40px black;
+}
+#appSelector .dropdown.hidden {
+  height: 0;
+  padding: 0;
+  opacity: 0;
+  transition: all 0.2s linear;
+}
+#appSelector .appOption:hover {
+  background-color: var(--brightblue);
+  cursor: pointer;
+}
+
 button,
 a {
   cursor: pointer;

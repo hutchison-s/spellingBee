@@ -12,6 +12,7 @@ import Compare from './components/Compare';
 
 export default function Games({logOut, profile, userData, setUserData}) {
     const [currentApp, setCurrentApp] = useState('Spelling')
+    const [isDropDownOpen, setIsDropdownOpen] = useState(false);
     let config = {method: 'post', headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': 'Basic c3BlbGxpbmdiZWU6Y2hhbXBpb24xMDAh'}}
 
     useEffect(()=>{
@@ -32,6 +33,11 @@ export default function Games({logOut, profile, userData, setUserData}) {
         }
     }
 
+    function handleAppSelect(e) {
+        setCurrentApp(e.target.innerHTML);
+        setIsDropdownOpen(false);
+    }
+
     return (
         <>
             <header>
@@ -40,11 +46,17 @@ export default function Games({logOut, profile, userData, setUserData}) {
                 <h1 className="title">
                     <span className="logoFont">Beeyond</span>
                 </h1>
-                <select name="appChoice" id="appChoice" className='appFont' defaultValue='Spelling' onInput={(e)=>{setCurrentApp(e.target.value)}}>
-                <option value="Spelling">Spelling</option>
-                <option value="Definitions">Definitions</option>
-                <option value="Compare">Compare</option>
-                </select>
+                <div id="appSelector" className='appFont' onClick={()=>{setIsDropdownOpen(!isDropDownOpen)}}>
+                    {currentApp}
+                    <button >
+                        {isDropDownOpen ? <i className="bi bi-caret-up-fill"></i> : <i className="bi bi-caret-down-fill"></i>}
+                    </button>
+                    <div className={isDropDownOpen ? "dropdown" : "dropdown hidden"}>
+                        <div className='appOption' onClick={handleAppSelect}>Spelling</div>
+                        <div className='appOption' onClick={handleAppSelect}>Definitions</div>
+                        <div className='appOption' onClick={handleAppSelect}>Compare</div>
+                    </div>
+                </div>
                 </div>
             </header>
             {returnApp(currentApp)}
