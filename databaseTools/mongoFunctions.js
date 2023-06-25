@@ -131,18 +131,44 @@ async function logWords(collection, filter) {
     }
 }
 
+// Log synonyms and antonyms that are not currently in the database as their own documents
+async function logMissing (collection, filter) {
+    const arr = await collection.find(filter).toArray()
+    for (const w of arr) {
+        for (let syn of w.synonyms) {
+            if (/^(Non|\S+\s+\S+)/i.test(syn)) {
+                continue;
+            }
+            let exists = await collection.findOne({word: syn})
+            if (!exists) {
+                console.log(syn)
+            }
+        }
+        for (let ant of w.antonyms) {
+            if (/^(Non|\S+\s+\S+)/i.test(ant)) {
+                continue;
+            }
+            let exists = await collection.findOne({word: ant})
+            if (!exists) {
+                console.log(ant)
+            }
+        }
+    }
+}
+
 async function main() {
     const uri = process.env.MONGO_URI;
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
     try {
         await client.connect()
-        await logWords(client.db("SpellingBeeWords").collection("words"), {etymology: /.*derived.*/i})
-        // await addAllFromFile(client.db("SpellingBeeWords").collection("words"), './sixteens.json')
-        // await addComparisons(client.db("SpellingBeeWords").collection("words"), './addComparatives.json')
+        // await logWords(client.db("SpellingBeeWords").collection("words"), {etymology: "Unknown"})
+        // await logMissing(client.db("SpellingBeeWords").collection("words"), {part_of_speech: "Verb"})
+        // await addAllFromFile(client.db("SpellingBeeWords").collection("words"), './verbs.json')
+        // await addComparisons(client.db("SpellingBeeWords").collection("words"), './addComparison.json')
         // await findDuplicates(client.db("SpellingBeeWords").collection("words"))
         // await deleteDup(client.db("SpellingBeeWords").collection("words"))
-    // await updateAll(client.db("SpellingBeeWords").collection("words"), {etymology: /.*named.*/i}, {etymology: 'Eponym'})
+        // await updateAll(client.db("SpellingBeeWords").collection("words"), {etymology: /.+century$/i}, {etymology: 'English'})
     } catch (err) {
         console.error(err);
     } finally {
