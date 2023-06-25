@@ -12,6 +12,8 @@ export default function UserModal({logOut, profile, userData}) {
             return 'Skilled';
           case 12:
             return 'Advanced';
+case 16:
+return 'Expert';
         }
       }
 

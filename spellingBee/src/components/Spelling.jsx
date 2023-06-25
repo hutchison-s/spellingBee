@@ -15,7 +15,8 @@ export default function Spelling({userData, setUserData}) {
     3: {next: 5},
     5: {next: 8, prev: 3},
     8: {next: 12, prev: 5},
-    12: {prev: 8}
+    12: {next: 16, prev: 8},
+16: {prev: 12}
   }
 
   useEffect(()=>{
@@ -119,6 +120,8 @@ export default function Spelling({userData, setUserData}) {
         return 'Skilled';
       case 12:
         return 'Advanced';
+case 16:
+return 'Expert';
     }
   }
 
