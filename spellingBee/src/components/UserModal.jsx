@@ -38,10 +38,10 @@ return 'Expert';
                 <span>Level: {levelToWord(userData.definitions.level)}</span>
                 <span>Score: {userData.definitions.score}</span>
             </p>
-            <h5 className='modalSubHead'>Likeness</h5>
+            <h5 className='modalSubHead'>Compare</h5>
             <p className='gameData'>
-                <span>Level: {levelToWord(userData.likeness.level)}</span>
-                <span>Score: {userData.likeness.score}</span>
+                <span>Level: {levelToWord(userData.compare.level)}</span>
+                <span>Score: {userData.compare.score}</span>
             </p>
             <h4 className='modalSectionHead'>Email</h4>
             <p>{profile && profile.email}</p>

@@ -6,7 +6,7 @@ import Definitions from './components/Definitions';
 import StatsModal from './components/StatsModal';
 import UserModal from './components/UserModal';
 import InfoModal from './components/InfoModal';
-import Likeness from './components/Likeness';
+import Compare from './components/Compare';
 
 
 
@@ -27,8 +27,8 @@ export default function Games({logOut, profile, userData, setUserData}) {
             return <Spelling userData={userData} setUserData={setUserData}/>;
         case 'Definitions':
             return <Definitions userData={userData} setUserData={setUserData}/>;
-        case 'Likeness':
-            return <Likeness userData={userData} setUserData={setUserData}/>
+        case 'Compare':
+            return <Compare userData={userData} setUserData={setUserData}/>
         }
     }
 
@@ -43,7 +43,7 @@ export default function Games({logOut, profile, userData, setUserData}) {
                 <select name="appChoice" id="appChoice" className='appFont' defaultValue='Spelling' onInput={(e)=>{setCurrentApp(e.target.value)}}>
                 <option value="Spelling">Spelling</option>
                 <option value="Definitions">Definitions</option>
-                <option value="Likeness">Likeness</option>
+                <option value="Compare">Compare</option>
                 </select>
                 </div>
             </header>

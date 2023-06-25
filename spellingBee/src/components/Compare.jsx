@@ -2,9 +2,9 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 
-export default function Likeness({ userData, setUserData }) {
-  const { score, correctWords, wrongWords } = userData.likeness;
-  const currentLevel = userData.likeness.level;
+export default function Compare({ userData, setUserData }) {
+  const { score, correctWords, wrongWords } = userData.compare;
+  const currentLevel = userData.compare.level;
   const [currentWord, setCurrentWord] = useState(null);
   const [otherWord, setOtherWord] = useState([]);
   const [streak, setStreak] = useState(0);
@@ -78,6 +78,7 @@ export default function Likeness({ userData, setUserData }) {
             let comparison = choice[Math.floor(Math.random() * choice.length)];
             setOtherWord(comparison);
             setCurrentWord(current.data);
+            pronounce(`${current.data.word}, ${comparison}`)
           });
       });
   }
@@ -95,8 +96,8 @@ export default function Likeness({ userData, setUserData }) {
     }
     setUserData({
       ...userData,
-      likeness: {
-        ...userData.likeness,
+      compare: {
+        ...userData.compare,
         score:
           score < Math.floor(currentWord.gradeLevel / 2)
             ? 0
@@ -126,8 +127,8 @@ export default function Likeness({ userData, setUserData }) {
     check.style.scale = "1.5";
     setUserData({
       ...userData,
-      likeness: {
-        ...userData.likeness,
+      compare: {
+        ...userData.compare,
         score: score + Math.floor(currentWord.gradeLevel / 2),
         correctWords: [...correctWords, currentWord],
         level: streak > 9 ? levels[currentLevel].next : currentLevel,
@@ -226,7 +227,7 @@ export default function Likeness({ userData, setUserData }) {
   );
 }
 
-Likeness.propTypes = {
+Compare.propTypes = {
   userData: PropTypes.object,
   setUserData: PropTypes.func,
 };

@@ -35,23 +35,24 @@ export default function InfoModal() {
                 <li>Choose correct definition from options in blue.</li>
                 <li>If incorrect, the correct definition will be highlighted before continuing.</li>
             </ul>
-            <h3 className="modalSectionHead">Likeness</h3>
-            <p>Beeyond Likeness sharpens users&apos; cognitive and linguistic skills by stimulating their critical thinking and honing their ability to discern subtle differences among words, fostering vocabulary growth and a deeper comprehension of word meanings.</p>
+            <h3 className="modalSectionHead">Compare</h3>
+            <p>Beeyond Compare sharpens users&apos; cognitive and linguistic skills by stimulating their critical thinking and honing their ability to discern subtle differences among words, fostering vocabulary growth and a deeper comprehension of word meanings.</p>
             <h4 className="modalSubHead">Tips</h4>
             <ul className="modalList">
                 <li>Words are displayed and spoken.</li>
-                <li>Choose the option that is least related to the given word from the adjectives in blue.</li>
-                <li>If incorrect, the correct definition will be highlighted before continuing.</li>
+                <li>Choose whether the displayed words are synonyms &#40;similar in meaning&#41;, antonyms &#40;opposite in meaning&#41;, or unrelated.</li>
+                <li>If answered incorrectly, the correct answer will be highlighted before continuing.</li>
             </ul>
             <h3 className="modalSectionHead">Score & Levels</h3>
             <h4 className="modalSubHead">Levels</h4>
             <ul className="modalList">
-                <li>There are four levels of achievement:
+                <li>There are five levels of achievement:
                     <ul>
                         <li>Novice</li>
                         <li>Beginner</li>
                         <li>Skilled</li>
                         <li>Advanced</li>
+                        <li>Expert</li>
                     </ul>
                 </li>
                 <li>In order to advance to the next level, you must have a streak of 10 answers in a row correct at your current level.</li>

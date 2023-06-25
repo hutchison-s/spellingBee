@@ -19,7 +19,7 @@ const initialUserData = {
       correctWords: [],
       wrongWords: []
   },
-  likeness: {
+  compare: {
     score: 0,
     level: 3,
     correctWords: [],

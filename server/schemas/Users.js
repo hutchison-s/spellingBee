@@ -55,7 +55,7 @@ const userSchema = new Schema({
                 }
             ]
         },
-        likeness: {
+        compare: {
             score: Number,
             level: Number,
             correctWords: [
