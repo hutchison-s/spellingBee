@@ -40,7 +40,7 @@ function App() {
             setProfile({name: "Guest", email: "None", sub: "guest"});
             let config = {method: 'get', headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}}
             axios.get('https://beeyondwords.vercel.app/users/guest', config).then(response => {
-                      setUserData(response.data.gameData)
+                      setUserData(initialUserData)
                       setKey("Basic "+btoa(response.data.username+":"+response.data.password))
                     }).catch(err => console.log(err))
           } else {
@@ -54,10 +54,18 @@ function App() {
                 })
                 .then((res) => {
                     setProfile(res.data);
-                    let config = {method: 'get', headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}}
+                    let config = {headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}}
                     axios.get('https://beeyondwords.vercel.app/users/'+res.data.sub, config).then(response => {
-                      setUserData(response.data.gameData)
-                      setKey("Basic "+btoa(response.data.username+":"+response.data.password))
+                      if (!response.data.gameData) {
+                        axios.post('https://beeyondwords.vercel.app/users/create', res.data, config)
+                          .then(response => {
+                            setUserData(response.data.gameData)
+                            setKey("Basic "+btoa(response.data.username+":"+response.data.password))
+                          }).catch(err => console.log(err))
+                      } else {
+                        setUserData(response.data.gameData)
+                        setKey("Basic "+btoa(response.data.username+":"+response.data.password))
+                      }
                     }).catch(err => console.log(err))
                 })
                 .catch((err) => console.log(err));

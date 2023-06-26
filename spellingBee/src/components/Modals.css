@@ -1,5 +1,6 @@
 #statsModal,
 #userModal,
+#leaderModal,
 #infoModal {
     position: fixed;
     top: 50%;
@@ -17,6 +18,7 @@
 }
 #statsModal::backdrop,
 #userModal::backdrop,
+#leaderModal::backdrop,
 #infoModal::backdrop {
     background-color: #22222288;
 }

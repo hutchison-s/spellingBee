@@ -24,19 +24,10 @@ const emptyGameData = {
 }
 
 userRouter.get('/:sub', (req, res) => {
-  console.log('reached server')
   Users.findOne({sub: req.params.sub}, )
       .then(response => {
           if (!response) {
-              let user = Users.create({
-                  username: process.env.NEW_USER,
-                  password: process.env.NEW_PASS,
-                  authLevel: 1,
-                  sub: req.params.sub,
-                  gameData: {...emptyGameData}
-                }).catch(err => console.log(err));
-                console.log(user)
-                res.send(user)
+              res.send(null)
           } else if (response.sub === 'guest') {
               Users.findOneAndUpdate({sub: 'guest'}, {
                 $set: {
@@ -48,6 +39,56 @@ userRouter.get('/:sub', (req, res) => {
               res.send(response)
           }
       }).catch(err => console.log(err))
+})
+
+userRouter.post('/create', (req, res) => {
+  let newUser = {
+    username: process.env.NEW_USER,
+    password: process.env.NEW_PASS,
+    name: req.body.name,
+    email: req.body.email,
+    sub: req.body.sub,
+    gameData: emptyGameData
+  }
+  Users.create(newUser).catch(err => console.log(err))
+  res.send(newUser)
+})
+
+userRouter.get('/leaderboard/:game', (req, res) => {
+  if (req.params.game !== 'all') {
+    const board = [];
+    Users.find({name: {$ne: null}}).then(allUsers => {
+      for (const user of allUsers) {
+        const [first, last] = user.name.split(' ');
+        let displayName = `${first} ${last[0]}`
+        board.push({name: displayName, score: user.gameData[req.params.game].score})
+      }
+      board.sort((a,b) => (b.score - a.score));
+      if (board.length > 20) {
+        board.splice(20, board.length-20)
+      }
+      res.send(board)
+    }).catch(err => console.log(err))
+  } else {
+    Users.find({name: {$ne: null}}).then(allUsers => {
+      const board = [];
+      for (const user of allUsers) {
+        const [first, last] = user.name.split(' ');
+        let displayName = `${first} ${last[0]}`;
+        let totalScore = (
+          user.gameData.spelling.score
+          + user.gameData.definitions.score
+          + user.gameData.compare.score
+        )
+        board.push({name: displayName, score: totalScore})
+      }
+      board.sort((a,b) => (b.score - a.score));
+      if (board.length > 20) {
+        board.splice(20, board.length-20)
+      }
+      res.send(board)
+    }).catch(err => console.log(err))
+  }
 })
 
 userRouter.use((req, res, next) => {

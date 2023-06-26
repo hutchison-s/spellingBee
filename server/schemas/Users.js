@@ -5,6 +5,8 @@ const userSchema = new Schema({
     username: String,
     password: String,
     authLevel: Number,
+    name: String,
+    email: String,
     sub: String,
     gameData: {
         spelling: {
