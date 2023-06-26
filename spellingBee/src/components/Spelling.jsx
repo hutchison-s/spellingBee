@@ -135,7 +135,21 @@ return 'Expert';
               <p id="correctSpelling" className=""></p>
               <form className='' onSubmit={checkSpelling} autoComplete='off' autoCorrect='off'>
                 <label className='' htmlFor='spelling'>{currentWord ? Math.floor(currentWord.gradeLevel / 2)+" point word" : "Fetching a word..."}</label>
-                <input type="text" autoComplete='off' autoCorrect='off' autoCapitalize="off" spellCheck="false" pattern='\s*[a-zA-Z]*-*[a-zA-Z]+\s*' title='Please use only letters and/or hyphen characters.' name='spelling' id='spelling'/>
+                <input 
+                  type="text" 
+                  autoComplete='off' 
+                  autoCorrect='off' 
+                  autoCapitalize="off" 
+                  spellCheck="false" 
+                  pattern='\s*[a-zA-Z]*-*[a-zA-Z]+\s*' 
+                  title='Please use only letters and/or hyphen characters.' 
+                  name='spelling' 
+                  id='spelling' 
+                  onFocus={(event) => {
+                    event.target.setAttribute('autocomplete', 'off');
+                    console.log(event.target.autocomplete);
+                  }}
+                />
                 <button className='primary' type='submit'>Check</button>
               </form>
             </div>
