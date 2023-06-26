@@ -59,10 +59,10 @@ return 'Expert';
     }
     for (let i=0; i<4; i++) {
       const res = await axios.get('https://beeyondwords.vercel.app/api/random?grade='+currentLevel, config)
-      if (done.includes(res.data.word)) {
+      if (done.includes(res.data[0].word)) {
         i--
       } else {
-        ops.push(res.data)
+        ops.push(res.data[0])
       }
     }
     setOptions([...ops])

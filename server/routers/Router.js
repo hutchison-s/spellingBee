@@ -65,17 +65,9 @@ wordRouter.use((req, res, next) => {
     })
 })
 
-wordRouter.get("/", (req, res) => {
-  Words.find()
-    .then((words) => {
-      res.send(words);
-    })
-    .catch((err) => {
-      res.status(400).send("Error occured: "+err);
-    });
-});
 wordRouter.get("/words/:word", (req, res) => {
-  Words.findOne({ word: req.params.word })
+  let param = new RegExp(`.*${req.params.word}.*`, 'i');
+  Words.findOne({ word: param })
     .then((word) => {
       if (!word) {
         res.status(400).send(`The word >>| ${req.params.word} |<< is not present in our database.`)
@@ -93,21 +85,22 @@ wordRouter.get("/words", (req, res) => {
     const keys = {
       word: {term: "word", val: new RegExp(`.*${req.query.word}.*`, 'i')},
       grade: {term: "gradeLevel", val: req.query.grade},
-      part: {term: "part_of_speech", val: new RegExp(`.*${req.query.part}.*`, 'i')},
+      part: {term: "part_of_speech", val: new RegExp(`^${req.query.part}$`, 'i')},
       origin: {term: "etymology", val: new RegExp(`.*${req.query.origin}.*`, 'i')}
     }
     for (let q in req.query) {
       if (keys.hasOwnProperty(q)) {
         filter[keys[q].term] = keys[q].val;
       } else {
-        if (q == "limit") {
-          break;
+        if (q == "results") {
+          continue;
+        } else {
+          res.status(400).send(`Improper query format. Parameter >>| ${q} |<< not found in API query options.`)
+          return;
         }
-        res.status(400).send(`Improper query format. Parameter >>| ${q} |<< not found in API query options.`)
-        return;
       } 
     }
-  Words.find(filter).limit(req.query.limit)
+  Words.find(filter).limit(req.query.results)
     .then((words) => {
       res.send(words);
       console.log(`Returned ${words.length} results`)
@@ -121,22 +114,32 @@ wordRouter.get("/random", (req, res) => {
   const filter = {};
     const keys = {
       grade: {term: "gradeLevel", val: req.query.grade},
-      part: {term: "part_of_speech", val: new RegExp(`.*${req.query.part}.*`, 'i')},
+      part: {term: "part_of_speech", val: new RegExp(`^${req.query.part}$`, 'i')},
       origin: {term: "etymology", val: new RegExp(`.*${req.query.origin}.*`, 'i')}
     }
     for (let q in req.query) {
       if (keys.hasOwnProperty(q)) {
         filter[keys[q].term] = keys[q].val;
       } else {
-        res.status(400).send(`Improper query format. Parameter >>| ${q} |<< not found in API query options.`)
-        return;
+        if (q == "results") {
+          continue;
+        } else {
+          res.status(400).send(`Improper query format. Parameter >>| ${q} |<< not found in API query options.`)
+          return;
+        }
       } 
     }
     Words.find(filter)
     .then((words) => {
-      const random = words[Math.floor(Math.random() * words.length-1)]
-      res.send(random);
-      console.log(`Returned one random word: ${random.word}, from ${words.length} results`)
+      let limit = req.query.results || 1;
+      const result = [];
+      for (let i=0; i<limit; i++) {
+        let random = words[Math.floor(Math.random() * words.length-1)]
+        result.push(random);
+        words.splice(words.indexOf(random), 1)
+      }
+      res.send(result);
+      console.log(`Returned ${limit} random word${limit > 1 && "s"} from ${words.length} results`)
     })
     .catch((err) => {
       res.status(400).send("Error occured: "+err);

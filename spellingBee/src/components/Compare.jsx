@@ -70,15 +70,15 @@ export default function Compare({ userData, setUserData, apiKey }) {
             config
           )
           .then((unrelated) => {
-            const { synonyms, antonyms } = current.data;
-            const nonWord = [unrelated.data.word];
+            const { synonyms, antonyms } = current.data[0];
+            const nonWord = [unrelated.data[0].word];
             const choice = [synonyms, antonyms, nonWord][
               Math.floor(Math.random() * 3)
             ];
             let comparison = choice[Math.floor(Math.random() * choice.length)];
             setOtherWord(comparison);
             setCurrentWord(current.data);
-            pronounce(`${current.data.word}, ${comparison}`)
+            pronounce(`${current.data[0].word}, ${comparison}`)
           });
       });
   }
