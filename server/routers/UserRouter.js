@@ -24,18 +24,21 @@ const emptyGameData = {
 }
 
 userRouter.get('/:sub', (req, res) => {
-  Users.findOne({sub: req.params.sub})
+  console.log('reached server')
+  Users.findOne({sub: req.params.sub}, )
       .then(response => {
           if (!response) {
-              Users.create({
+              let user = Users.create({
                   username: process.env.NEW_USER,
                   password: process.env.NEW_PASS,
                   authLevel: 1,
                   sub: req.params.sub,
                   gameData: {...emptyGameData}
-              }).then(result => {res.send(result)}).catch(err => console.log(err))
-          } else if (response === 'guest') {
-              Users.findOneAndUpdate({sub: req.params.sub}, {
+                }).catch(err => console.log(err));
+                console.log(user)
+                res.send(user)
+          } else if (response.sub === 'guest') {
+              Users.findOneAndUpdate({sub: 'guest'}, {
                 $set: {
                   gameData: {...emptyGameData}
                 }})

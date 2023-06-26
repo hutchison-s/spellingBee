@@ -7,11 +7,11 @@ export default defineConfig({
   // server: {
   //   proxy: {
   //     '/api': {
-  //       target: 'http://localhost:5000',
+  //       target: 'https://beeyondwords.vercel.app',
   //       changeOrigin: true
   //     },
   //     '/users': {
-  //       target: 'http://localhost:5000',
+  //       target: 'https://beeyondwords.vercel.app',
   //       changeOrigin: true
   //     }
   //   }

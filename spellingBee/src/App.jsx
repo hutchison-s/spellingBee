@@ -29,7 +29,7 @@ const initialUserData = {
 
 function App() {
   const [ user, setUser ] = useState(null);
-  const [ key, setKey ] = useState(null);
+  const [ key, setKey ] = useState("");
   const [ profile, setProfile ] = useState({});
   const [userData, setUserData] = useState(initialUserData);
 
@@ -43,8 +43,7 @@ function App() {
                       setUserData(response.data.gameData)
                       setKey("Basic "+btoa(response.data.username+":"+response.data.password))
                     }).catch(err => console.log(err))
-            return;
-          }
+          } else {
           
             axios
                 .get(`https://www.googleapis.com/oauth2/v3/userinfo`, {
@@ -62,6 +61,7 @@ function App() {
                     }).catch(err => console.log(err))
                 })
                 .catch((err) => console.log(err));
+          }
         }
     },
     [ user ]
@@ -78,7 +78,7 @@ function App() {
   return (
     <>
       {user
-        ? <Games logOut={logOut} profile={profile} userData={userData} setUserData={setUserData} key={key}/>
+        ? <Games logOut={logOut} profile={profile} userData={userData} setUserData={setUserData} apiKey={key}/>
         : <Login setUser={setUser} />}
     </>
   )

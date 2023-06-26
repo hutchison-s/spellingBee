@@ -48,7 +48,7 @@ wordRouter.use((req, res, next) => {
       if (!user) {
         let err = new Error('No user account found.')
         res.setHeader('WWW-Authenticate', 'Basic');
-        err.status = 401;
+
         return next(err);
       }
       console.log(user.authLevel)
@@ -57,7 +57,7 @@ wordRouter.use((req, res, next) => {
       } else {
         let err = new Error('Incorrect credentials, or not a high enough authorization level.');
         res.setHeader('WWW-Authenticate', 'Basic');
-        err.status = 401;
+
         return next(err);
       }
     }).catch(err => {

@@ -10,10 +10,10 @@ import Compare from './components/Compare';
 
 
 
-export default function Games({logOut, profile, userData, setUserData, key}) {
+export default function Games({logOut, profile, userData, setUserData, apiKey}) {
     const [currentApp, setCurrentApp] = useState('Spelling')
     const [isDropDownOpen, setIsDropdownOpen] = useState(false);
-    let config = {method: 'post', headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': key}}
+    let config = {method: 'post', headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': apiKey}}
 
     useEffect(()=>{
         if (profile) {
@@ -25,11 +25,11 @@ export default function Games({logOut, profile, userData, setUserData, key}) {
     function returnApp(choice) {
         switch (choice) {
         case 'Spelling':
-            return <Spelling userData={userData} setUserData={setUserData} key={key}/>;
+            return <Spelling userData={userData} setUserData={setUserData} apiKey={apiKey}/>;
         case 'Definitions':
-            return <Definitions userData={userData} setUserData={setUserData} key={key}/>;
+            return <Definitions userData={userData} setUserData={setUserData} apiKey={apiKey}/>;
         case 'Compare':
-            return <Compare userData={userData} setUserData={setUserData} key={key}/>
+            return <Compare userData={userData} setUserData={setUserData} apiKey={apiKey}/>
         }
     }
 
@@ -79,5 +79,5 @@ Games.propTypes = {
     profile: PropTypes.object,
     userData: PropTypes.object,
     setUserData: PropTypes.func,
-    key: PropTypes.string
+    apiKey: PropTypes.string
 }
