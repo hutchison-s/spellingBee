@@ -30,6 +30,7 @@ export default function Spelling({userData, setUserData, apiKey}) {
     }
     let config = {headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': apiKey}}
     axios.get('https://beeyondwords.vercel.app/api/random?grade='+currentLevel, config).then(response => {
+      console.log(response.data[0])
       if (done.includes(response.data[0].word)) {
         return getRandom();
       } else {

@@ -30,25 +30,25 @@ export default function InfoModal() {
         </thead>
         <tbody>
           <tr>
-            <td style="font-size: xx-large">
+          <td style={{fontSize: "xx-large"}}>
               <i className="bi bi-person-circle"></i>
             </td>
             <td>Profile Details & Logout Button</td>
           </tr>
           <tr>
-            <td style="font-size: xx-large">
+            <td style={{fontSize: "xx-large"}}>
               <i className="bi bi-bar-chart-fill"></i>
             </td>
             <td>Personalized User Stats</td>
           </tr>
           <tr>
-            <td style="font-size: xx-large">
+          <td style={{fontSize: "xx-large"}}>
               <i className="bi bi-trophy"></i>
             </td>
             <td>Leaderboards & Badges</td>
           </tr>
           <tr>
-            <td style="font-size: xx-large">
+          <td style={{fontSize: "xx-large"}}>
               <i className="bi bi-info-circle"></i>
             </td>
             <td>App Info & Instructions</td>
