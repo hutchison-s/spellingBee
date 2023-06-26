@@ -202,6 +202,11 @@ button.speech {
   box-shadow: 0 0 25px #f6db5522 inset;
   text-shadow: 0 0 10px black;
 }
+button.speech:hover,
+button.primary:hover,
+button.speech:hover {
+  filter: brightness(1.2)
+}
 button.speech:last-child {
   grid-column: span 2;
 }
@@ -255,6 +260,8 @@ footer>nav {
   background: #171B27aa;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
+  animation: glimmer 2s linear 1s both;
+  background-repeat: no-repeat;
 }
 footer button {
   background-color: transparent;
@@ -267,6 +274,19 @@ footer button:hover {
   opacity: 1;
   scale: 1.1;
   color: var(--honey);
+}
+
+@keyframes glimmer {
+  from {
+    background-image: linear-gradient(to right, transparent 40%, #ffffff33 60%, transparent 100%);
+    background-size: 400%;
+    background-position: -50%;
+  }
+  to {
+    background-image: linear-gradient(to right, transparent 40%, #ffffff33 60%, transparent 100%);
+    background-size: 400%;
+    background-position: 200%;
+  }
 }
 
 @media screen and (min-width: 600px) {

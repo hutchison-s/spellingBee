@@ -21,6 +21,10 @@ export default function Spelling({userData, setUserData, apiKey}) {
 
   useEffect(()=>{
     getRandom()
+    setTimeout(()=>{document.querySelector(".dropdown").classList.toggle('hidden')}, 500);
+    setTimeout(()=>{
+      document.querySelector(".dropdown").classList.toggle('hidden');
+    }, 1500)
   }, [])
 
   function getRandom() {
