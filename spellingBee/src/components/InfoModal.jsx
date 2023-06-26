@@ -12,7 +12,7 @@ export default function InfoModal() {
         <i className="bi bi-x-circle-fill"></i>
       </button>
       <h2 className="modalTitle">Beeyond Info</h2>
-      <h3 className="modaleSectionHead">Toolbar</h3>
+      <h3 className="modalSectionHead">Toolbar</h3>
       <p>
         Clicking on any of the icons in the toolbar will open a modal to
         interact with the tools&apos; contents.
@@ -24,8 +24,8 @@ export default function InfoModal() {
       <table>
         <thead>
           <tr>
-            <th>Icon</th>
-            <th>Feature</th>
+            <th className="modalSubHead">Icon</th>
+            <th className="modalSubHead">Feature</th>
           </tr>
         </thead>
         <tbody>
