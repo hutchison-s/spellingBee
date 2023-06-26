@@ -77,7 +77,7 @@ export default function Compare({ userData, setUserData, apiKey }) {
             ];
             let comparison = choice[Math.floor(Math.random() * choice.length)];
             setOtherWord(comparison);
-            setCurrentWord(current.data);
+            setCurrentWord(current.data[0]);
             pronounce(`${current.data[0].word}, ${comparison}`)
           });
       });
