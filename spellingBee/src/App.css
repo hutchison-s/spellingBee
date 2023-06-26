@@ -244,7 +244,8 @@ footer>nav {
   font-size: 1.75rem;
   border-top: 1px solid #0969D7;
   background: #171B27aa;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 footer a {
   color: #f6db55;
