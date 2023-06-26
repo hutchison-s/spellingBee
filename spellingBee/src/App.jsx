@@ -60,7 +60,7 @@ function App() {
                         axios.post('https://beeyondwords.vercel.app/users/create', res.data, config)
                           .then(response => {
                             setUserData(response.data.gameData)
-                            setKey("Basic c3BlbGxsaW5nYmVlOmNoYW1waW9uMTAwIQ")
+                            setKey("Basic "+btoa(response.data.username+":"+response.data.password))
                           }).catch(err => console.log(err))
                       } else {
                         setUserData(response.data.gameData)
