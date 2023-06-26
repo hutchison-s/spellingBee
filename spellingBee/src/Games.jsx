@@ -47,17 +47,17 @@ export default function Games({logOut, profile, userData, setUserData, apiKey}) 
                 <h1 className="title">
                     <span className="logoFont">Beeyond</span>
                 </h1>
-                <div id="appSelector" className='appFont' onClick={()=>{setIsDropdownOpen(!isDropDownOpen)}}>
+                <button type='button' id="appSelector" className='appFont' onClick={()=>{setIsDropdownOpen(!isDropDownOpen)}}>
                     {currentApp}
-                    <button >
+                    <button id='appSelectorCurrent'>
                         {isDropDownOpen ? <i className="bi bi-caret-up-fill"></i> : <i className="bi bi-caret-down-fill"></i>}
                     </button>
                     <div className={isDropDownOpen ? "dropdown" : "dropdown hidden"}>
-                        <div className='appOption' onClick={handleAppSelect}>Spelling</div>
-                        <div className='appOption' onClick={handleAppSelect}>Definitions</div>
-                        <div className='appOption' onClick={handleAppSelect}>Compare</div>
+                        <button className='appOption appFont' onClick={handleAppSelect}>Spelling</button>
+                        <button className='appOption appFont' onClick={handleAppSelect}>Definitions</button>
+                        <button className='appOption appFont' onClick={handleAppSelect}>Compare</button>
                     </div>
-                </div>
+                </button>
                 </div>
             </header>
             {returnApp(currentApp)}
@@ -67,10 +67,10 @@ export default function Games({logOut, profile, userData, setUserData, apiKey}) 
             <InfoModal />
             <footer>
                 <nav>
-                <div><a onClick={()=>{document.getElementById('userModal').showModal()}}><i className="bi bi-person-circle"></i></a></div>
-                <div><a onClick={()=>{document.getElementById('statsModal').showModal()}}><i className="bi bi-bar-chart-line-fill"></i></a></div>
-                <div><a onClick={()=>{document.getElementById('leaderModal').showModal()}}><i className="bi bi-trophy"></i></a></div>
-                <div><a onClick={()=>{document.getElementById('infoModal').showModal()}}><i className="bi bi-info-circle"></i></a></div>
+                <div><button onClick={()=>{document.getElementById('userModal').showModal()}}><i className="bi bi-person-circle"></i></button></div>
+                <div><button onClick={()=>{document.getElementById('statsModal').showModal()}}><i className="bi bi-bar-chart-line-fill"></i></button></div>
+                <div><button onClick={()=>{document.getElementById('leaderModal').showModal()}}><i className="bi bi-trophy"></i></button></div>
+                <div><button onClick={()=>{document.getElementById('infoModal').showModal()}}><i className="bi bi-info-circle"></i></button></div>
                 </nav>
             </footer>
         </>

@@ -96,7 +96,11 @@ article.appContainer {
   opacity: 0.3;
 }
 #appSelector {
+  background-color: transparent;
+  border: none;
+  display: block;
   position: relative;
+  width: 100%;
   max-width: 400px;
   margin: 0 auto;
   cursor: pointer;
@@ -107,7 +111,7 @@ article.appContainer {
   border-top-right-radius: 1rem;
   border: 1px solid var(--honey);
 }
-#appSelector button {
+#appSelectorCurrent {
   all: unset;
   color: var(--honey);
   position: absolute;
@@ -140,6 +144,11 @@ article.appContainer {
   padding: 0;
   opacity: 0;
   transition: all 0.2s linear;
+}
+#appSelector .appOption {
+  background-color: transparent;
+  border: none;
+  color: inherit;
 }
 #appSelector .appOption:hover {
   background-color: var(--brightblue);
@@ -247,14 +256,17 @@ footer>nav {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 }
-footer a {
-  color: #f6db55;
+footer button {
+  background-color: transparent;
+  border: none;
+  color: var(--almostwhite);
   padding: 1rem;
   opacity: 0.7
 }
-footer a:hover {
+footer button:hover {
   opacity: 1;
   scale: 1.1;
+  color: var(--honey);
 }
 
 @media screen and (min-width: 600px) {

@@ -21,7 +21,7 @@ article:has(.loginButtons) {
     font-size: larger;
 }
 #guestLogin {
-    all: unset;
+    border: none;
     color: var(--almostwhite);
     background-color: var(--darkgold);
     border-radius: 1rem;
