@@ -21,7 +21,7 @@ export default function Spelling({userData, setUserData, apiKey}) {
 
   useEffect(()=>{
     getRandom()
-  }, [apiKey])
+  }, [])
 
   function getRandom() {
     const done = [];

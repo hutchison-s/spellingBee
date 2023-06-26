@@ -41,7 +41,7 @@ function App() {
             let config = {method: 'get', headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}}
             axios.get('https://beeyondwords.vercel.app/users/guest', config).then(response => {
                       setUserData(initialUserData)
-                      setKey("Basic "+btoa(response.data.username+":"+response.data.password))
+                      setKey("Basic "+btoa(response.data.username+":"+response.data.password).replace("=", ""))
                     }).catch(err => console.log(err))
           } else {
           
@@ -60,7 +60,7 @@ function App() {
                         axios.post('https://beeyondwords.vercel.app/users/create', res.data, config)
                           .then(response => {
                             setUserData(response.data.gameData)
-                            setKey("Basic "+btoa(response.data.username+":"+response.data.password))
+                            setKey("Basic c3BlbGxsaW5nYmVlOmNoYW1waW9uMTAwIQ")
                           }).catch(err => console.log(err))
                       } else {
                         setUserData(response.data.gameData)
@@ -85,7 +85,7 @@ function App() {
 
   return (
     <>
-      {user
+      {user && key && userData
         ? <Games logOut={logOut} profile={profile} userData={userData} setUserData={setUserData} apiKey={key}/>
         : <Login setUser={setUser} />}
     </>

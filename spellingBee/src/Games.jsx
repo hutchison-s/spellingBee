@@ -17,7 +17,7 @@ export default function Games({logOut, profile, userData, setUserData, apiKey}) 
     let config = {method: 'post', headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': apiKey}}
 
     useEffect(()=>{
-        if (profile) {
+        if (apiKey) {
             axios.post('https://beeyondwords.vercel.app/users/'+profile.sub, userData, config)
                 .catch(err => console.log(err))
         }
