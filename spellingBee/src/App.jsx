@@ -80,6 +80,9 @@ function App() {
     setProfile(null);
     setUser(null);
     setUserData(initialUserData);
+    setKey('');
+    sessionStorage.removeItem('beeyondCode');
+    localStorage.removeItem('beeyondCode');
     console.log("logged out")
   };  
 

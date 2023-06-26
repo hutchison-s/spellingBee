@@ -10,12 +10,24 @@ article:has(.loginButtons) {
     gap: 2rem;
     margin-top: 2rem;
 }
-.loginButtons button:first-of-type {
+#googleLogin {
     background: var(--brightblue);
     color: var(--almostwhite);
     border: 2px solid var(--honey);
     padding: 0.5rem 2rem;
     border-radius: 1rem;
+}
+#googleLogin i {
+    font-size: larger;
+}
+#guestLogin {
+    all: unset;
+    color: var(--almostwhite);
+    background-color: var(--darkgold);
+    border-radius: 1rem;
+    width:fit-content;
+    padding: 0.25rem 1rem;
+    margin: 0 auto;
 }
 .loginLogo .logoIcon {
     animation: float 2s linear infinite 2s alternate;
@@ -28,6 +40,13 @@ article:has(.loginButtons) {
 #loginOptions {
     opacity: 0;
     animation: appear 0.6s ease-in-out 2s both;
+}
+label[for=autoLogin] {
+    color: var(--almostwhite);
+    font-size: x-small;
+}
+div:has( > #autoLogin) {
+    transform: translateY(-100%);
 }
 
 @keyframes appear {
