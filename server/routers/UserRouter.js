@@ -135,4 +135,10 @@ userRouter.use((req, res, next) => {
       .catch(err => console.log(err))
   })
 
+  userRouter.delete('/:sub', (req, res) => {
+    Users.findOneAndDelete({sub: req.params.sub})
+      .then(response => res.send(response))
+      .catch(err => console.log(err))
+  })
+
   module.exports = userRouter;

@@ -163,12 +163,12 @@ async function main() {
     try {
         await client.connect()
         // await logWords(client.db("SpellingBeeWords").collection("words"), {etymology: "Unknown"})
-        // await logMissing(client.db("SpellingBeeWords").collection("words"), {part_of_speech: "Verb"})
-        // await addAllFromFile(client.db("SpellingBeeWords").collection("words"), './verbs.json')
+        // await logMissing(client.db("SpellingBeeWords").collection("words"), {part_of_speech: "Adjective"})
+        // await addAllFromFile(client.db("SpellingBeeWords").collection("words"), './add.json')
         // await addComparisons(client.db("SpellingBeeWords").collection("words"), './addComparison.json')
         // await findDuplicates(client.db("SpellingBeeWords").collection("words"))
         // await deleteDup(client.db("SpellingBeeWords").collection("words"))
-        // await updateAll(client.db("SpellingBeeWords").collection("words"), {etymology: /.+century$/i}, {etymology: 'English'})
+        await updateAll(client.db("SpellingBeeWords").collection("words"), {etymology: /.+French$/i}, {etymology: 'French'})
     } catch (err) {
         console.error(err);
     } finally {
