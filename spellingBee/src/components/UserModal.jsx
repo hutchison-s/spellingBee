@@ -1,7 +1,9 @@
 import PropTypes from "prop-types";
 import "./Modals.css";
+import DeleteAccountModal from "./DeleteAccountModal";
+import axios from 'axios';
 
-export default function UserModal({ logOut, profile, userData, setUserData }) {
+export default function UserModal({ logOut, profile, userData, setUserData, apiKey }) {
   function levelToWord(level) {
     switch (level) {
       case 3:
@@ -53,7 +55,17 @@ export default function UserModal({ logOut, profile, userData, setUserData }) {
         <img className="userPhoto" src={profile.picture} alt="user photo" />
       )}
       <p>{profile && profile.name}</p>
-      <p>{profile && profile.gamerName} <button id="editNameBtn" onClick={()=>{document.getElementById('newName').showModal()}}><i className="bi bi-pencil"></i></button></p>
+      {profile.sub !== 'guest' && <p>
+        {profile && profile.gamerName}{" "}
+        <button
+          id="editNameBtn"
+          onClick={() => {
+            document.getElementById("newName").showModal();
+          }}
+        >
+          <i className="bi bi-pencil"></i>
+        </button>
+      </p>}
       <h4 className="modalSectionHead">Progress</h4>
       <h5 className="modalSubHead">Spelling</h5>
       <p className="gameData">
@@ -77,7 +89,41 @@ export default function UserModal({ logOut, profile, userData, setUserData }) {
         Log Out
       </button>
       
-      <div><button className="resetBtn" onClick={()=>{setUserData(initialUserData)}}>Erase All Progress</button></div>
+      {
+        profile.sub !== 'guest' 
+        && <>
+        <div>
+        <button
+          className="resetBtn"
+          onClick={() => {
+            setUserData(initialUserData);
+          }}
+        >
+          Erase All Progress
+        </button>
+      </div>
+        <div>
+        <button
+          className="resetBtn"
+          onClick={() => {
+            document.getElementById("deleteAccount").showModal();
+          }}
+        >
+          Delete Account
+        </button>
+      </div>
+      <DeleteAccountModal 
+        onConfirm={()=>{
+          axios.delete('https://beeyondwords.vercel.app/users/'+profile.sub, {headers: {"Content-Type": "application/json", "Accept": "application/json", "Authorization": apiKey}})
+            .catch(console.log)
+          logOut()
+        }}
+        onCancel={()=>{
+          document.getElementById("deleteAccount").close();
+        }}
+      />
+      </>
+      }
     </dialog>
   );
 }
@@ -86,5 +132,6 @@ UserModal.propTypes = {
   logOut: PropTypes.func,
   profile: PropTypes.object,
   userData: PropTypes.object,
-  setUserData: PropTypes.func
+  setUserData: PropTypes.func,
+  apiKey: PropTypes.string
 };

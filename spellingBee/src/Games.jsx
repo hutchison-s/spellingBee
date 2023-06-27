@@ -62,7 +62,7 @@ export default function Games({logOut, profile, userData, setUserData, apiKey}) 
             </header>
             {returnApp(currentApp)}
             <StatsModal userData={userData}/>
-            <UserModal logOut={logOut} profile={profile} userData={userData} setUserData={setUserData} />
+            <UserModal logOut={logOut} profile={profile} userData={userData} setUserData={setUserData} apiKey={apiKey}/>
             <LeaderModal userData={userData}/>
             <InfoModal />
             <footer>
