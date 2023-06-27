@@ -100,9 +100,6 @@ function App() {
                 config
               )
               .then((response) => {
-                if (!response.data.gamerName) {
-                  document.getElementById("newName").showModal();
-                }
                 if (!response.data.gameData) {
                   axios
                     .post(
@@ -130,6 +127,11 @@ function App() {
                         response.data.username + ":" + response.data.password
                       )
                   );
+                }
+                if (!response.data.gamerName) {
+                  document.getElementById("newName").showModal();
+                } else {
+                  setProfile({...res.data, gamerName: response.data.gamerName})
                 }
               })
               .catch((err) => console.log(err));

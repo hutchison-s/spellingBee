@@ -60,26 +60,19 @@ export default function Compare({ userData, setUserData, apiKey }) {
   async function getOptions() {
     axios
       .get(
-        `https://beeyondwords.vercel.app/api/random?part=adjective|verb|adverb&grade=${currentLevel}`,
+        `https://beeyondwords.vercel.app/api/random?part=adjective|verb|adverb&grade=${currentLevel}&results=2`,
         config
       )
-      .then((current) => {
-        axios
-          .get(
-            `https://beeyondwords.vercel.app/api/random?part=adjective|verb|adverb&grade=${currentLevel}`,
-            config
-          )
-          .then((unrelated) => {
-            const { synonyms, antonyms } = current.data[0];
-            const nonWord = [unrelated.data[0].word];
-            const choice = [synonyms, antonyms, nonWord][
-              Math.floor(Math.random() * 3)
-            ];
-            let comparison = choice[Math.floor(Math.random() * choice.length)];
-            setOtherWord(comparison);
-            setCurrentWord(current.data[0]);
-            pronounce(`${current.data[0].word}, ${comparison}`)
-          });
+      .then((results) => {
+        const { synonyms, antonyms } = results.data[0];
+        const nonWord = [results.data[1].word];
+        const choice = [synonyms, antonyms, nonWord][
+          Math.floor(Math.random() * 3)
+        ];
+        let comparison = choice[Math.floor(Math.random() * choice.length)];
+        setOtherWord(comparison);
+        setCurrentWord(results.data[0]);
+        pronounce(`${results.data[0].word}, ${comparison}`)
       });
   }
 
