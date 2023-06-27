@@ -50,7 +50,7 @@ function App() {
         { gamerName: name },
         config
       )
-      .then((response) => setProfile(response.data))
+      .then((response) => setProfile({...profile, gamerName: response.data.gamerName}))
       .catch((err) => console.log(err));
   }
 
