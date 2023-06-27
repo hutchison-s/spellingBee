@@ -87,6 +87,7 @@ function App() {
           })
           .then((res) => {
             setProfile(res.data);
+            console.log(res.data)
             let config = {
               headers: {
                 "Content-Type": "application/json",

@@ -60,9 +60,7 @@ userRouter.get('/leaderboard/:game', (req, res) => {
     const board = [];
     Users.find({name: {$ne: null}}).then(allUsers => {
       for (const user of allUsers) {
-        const [first, last] = user.name.split(' ');
-        let displayName = `${first} ${last[0]}`
-        board.push({name: displayName, score: user.gameData[req.params.game].score})
+        board.push({name: user.gamerName, score: user.gameData[req.params.game].score})
       }
       board.sort((a,b) => (b.score - a.score));
       if (board.length > 20) {
