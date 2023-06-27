@@ -48,6 +48,7 @@ userRouter.post('/create', (req, res) => {
     name: req.body.name,
     email: req.body.email,
     sub: req.body.sub,
+    gamerName: '',
     gameData: emptyGameData
   }
   Users.create(newUser).catch(err => console.log(err))
@@ -73,14 +74,12 @@ userRouter.get('/leaderboard/:game', (req, res) => {
     Users.find({name: {$ne: null}}).then(allUsers => {
       const board = [];
       for (const user of allUsers) {
-        const [first, last] = user.name.split(' ');
-        let displayName = `${first} ${last[0]}`;
         let totalScore = (
           user.gameData.spelling.score
           + user.gameData.definitions.score
           + user.gameData.compare.score
         )
-        board.push({name: displayName, score: totalScore})
+        board.push({name: user.gamerName, score: totalScore})
       }
       board.sort((a,b) => (b.score - a.score));
       if (board.length > 20) {
@@ -127,7 +126,13 @@ userRouter.use((req, res, next) => {
   userRouter.post('/:sub', (req, res) => {
     Users.findOneAndUpdate({sub: req.params.sub}, {
       $set: {gameData: {...req.body}}
-    })
+    }, {new: true})
+      .then(response => res.send(response))
+      .catch(err => console.log(err))
+  })
+
+  userRouter.put('/:sub', (req, res) => {
+    Users.findOneAndUpdate({sub: req.params.sub}, req.body, {new: true})
       .then(response => res.send(response))
       .catch(err => console.log(err))
   })

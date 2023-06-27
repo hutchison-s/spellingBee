@@ -8,6 +8,7 @@ const userSchema = new Schema({
     name: String,
     email: String,
     sub: String,
+    gamerName: String,
     gameData: {
         spelling: {
             score: Number,

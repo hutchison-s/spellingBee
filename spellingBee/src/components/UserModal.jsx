@@ -53,6 +53,7 @@ export default function UserModal({ logOut, profile, userData, setUserData }) {
         <img className="userPhoto" src={profile.picture} alt="user photo" />
       )}
       <p>{profile && profile.name}</p>
+      <p>{profile && profile.gamerName} <button id="editNameBtn" onClick={()=>{document.getElementById('newName').showModal()}}><i className="bi bi-pencil"></i></button></p>
       <h4 className="modalSectionHead">Progress</h4>
       <h5 className="modalSubHead">Spelling</h5>
       <p className="gameData">

@@ -243,8 +243,13 @@ form input {
   background: #EDF2EF22;
   text-align: center;
 }
-
-
+#editNameBtn {
+  border: none;
+  background-color: transparent;
+  color: var(--almostwhite);
+  padding-left: 10px;
+  font-size: large;
+}
 footer>nav {
   position: fixed;
   bottom: 0;
